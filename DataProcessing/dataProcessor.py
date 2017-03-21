@@ -60,7 +60,7 @@ def findLogins(rawData):
             endTime = datetime.strptime(row["time"],"%Y-%m-%d %H:%M:%S")
             delta =(endTime - startTime).total_seconds()
             
-            logEntry = {"user": row["user"], "scheme": row["scheme"], "event": row["event"], "timeDelta": delta}
+            logEntry = {"user": row["user"], "site": row["site"], "scheme": row["scheme"], "event": row["event"], "timeDelta": delta}
             
             data.append(logEntry)
             
@@ -71,7 +71,7 @@ def findLogins(rawData):
     
 def writeLoginsToCSV(data):
     with open("logins.csv", "wb") as csvfile:
-        fieldnames = ["user", "scheme", "event", "timeDelta"]
+        fieldnames = ["user", "site", "scheme", "event", "timeDelta"]
         writer = csv.DictWriter(csvfile, fieldnames)
         
         writer.writeheader()
