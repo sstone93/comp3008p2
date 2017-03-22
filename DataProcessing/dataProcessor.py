@@ -31,6 +31,15 @@ def readRawDataCSV():
         return
     return data
     
+def writeLoginsToCSV(data):
+    with open("logins.csv", "wb") as csvfile:
+        fieldnames = ["user", "site", "scheme", "event", "timeDelta"]
+        writer = csv.DictWriter(csvfile, fieldnames)
+        
+        writer.writeheader()
+        for row in data:
+            writer.writerow(row)
+            
 def readLoginsCSV():
     data = []
     try:
@@ -44,18 +53,26 @@ def readLoginsCSV():
     return data
     
 def findLogins(rawData):
-    startEvent = None
+    startEvents = {}
     data = []
+    
     starts = 0
     logins = 0
-    '''and row["event"] == "success"'''
+    falseLogins = 0
+    
     for row in rawData:
         if row["mode"] == "enter" and row["event"] == "start":
-            startEvent = row
+            startEvents[row['user']] = row
             starts = starts + 1
+            
         if row["mode" ] == "login":
-            if startEvent == None:
+            if not row['user'] in startEvents.keys():
+                falseLogins = falseLogins + 1
                 continue
+                
+            startEvent = startEvents[row['user']]
+            
+            
             startTime = datetime.strptime(startEvent["time"],"%Y-%m-%d %H:%M:%S")
             endTime = datetime.strptime(row["time"],"%Y-%m-%d %H:%M:%S")
             delta =(endTime - startTime).total_seconds()
@@ -65,18 +82,12 @@ def findLogins(rawData):
             data.append(logEntry)
             
             logins = logins + 1
-            startEvent = None
+            del startEvents[row['user']]
             
+    print "Starts %d" %starts
+    print "Complete logins %d" %logins
+    print "Logins without a start %d" %falseLogins
     return data
-    
-def writeLoginsToCSV(data):
-    with open("logins.csv", "wb") as csvfile:
-        fieldnames = ["user", "site", "scheme", "event", "timeDelta"]
-        writer = csv.DictWriter(csvfile, fieldnames)
-        
-        writer.writeheader()
-        for row in data:
-            writer.writerow(row)
             
 def main():
     rawData = readRawDataCSV()
@@ -85,7 +96,7 @@ def main():
     
     writeLoginsToCSV(loginData)
     
-    print readLoginsCSV()
+    loginData = readLoginsCSV()
     
     
 if __name__ == "__main__":
