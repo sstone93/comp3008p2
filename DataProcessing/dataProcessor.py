@@ -88,6 +88,22 @@ def findLogins(rawData):
     print "Complete logins %d" %logins
     print "Logins without a start %d" %falseLogins
     return data
+    
+def organizeByUser(loginsData):
+    users = {}
+    for row in loginsData:
+        print row['user']
+        if row['user'] in users.keys():
+            users[row['user']].append(row)
+        else:
+            users[row['user']] = [row]
+    
+    for user in users.keys():
+        print user
+        print len(users[user])
+        
+    print len(users)
+    
             
 def main():
     rawData = readRawDataCSV()
@@ -98,6 +114,7 @@ def main():
     
     loginData = readLoginsCSV()
     
+    organizeByUser(loginData)
     
 if __name__ == "__main__":
     main()
