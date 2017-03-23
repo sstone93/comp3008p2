@@ -52,6 +52,15 @@ def readLoginsCSV():
         return
     return data
     
+def writeUserDataToCSV(data):
+    with open("userData.csv", "wb") as csvfile:
+        fieldnames = ["user", "scheme", "totalLogins", "successes", "failures", "meanSucTime", "meanFailTime"]
+        writer = csv.DictWriter(csvfile, fieldnames)
+        
+        writer.writeheader()
+        for row in data:
+            writer.writerow(row)
+    
 def findLogins(rawData):
     startEvents = {}
     data = []
@@ -90,19 +99,43 @@ def findLogins(rawData):
     return data
     
 def organizeByUser(loginsData):
-    users = {}
+    usersDict = {}
     for row in loginsData:
-        print row['user']
-        if row['user'] in users.keys():
-            users[row['user']].append(row)
+        if row['user'] in usersDict.keys():
+            usersDict[row['user']].append(row)
         else:
-            users[row['user']] = [row]
+            usersDict[row['user']] = [row]
     
-    for user in users.keys():
-        print user
-        print len(users[user])
+    data = []
+    for user in usersDict.keys():
+        successes = 0
+        failures = 0
+        sucSum = 0
+        failSum = 0
         
-    print len(users)
+        for login in usersDict[user]:
+            if login['event'] == "success":
+                successes = successes + 1
+                sucSum = sucSum + float(login['timeDelta'])
+            else:
+                failures = failures + 1
+                failSum = failSum + float(login['timeDelta'])
+              
+        if successes == 0:
+            meanSuccess = 0
+        else:
+            meanSuccess = (sucSum/successes)
+            
+        if failures == 0:
+            meanFailure = 0
+        else:
+            meanFailure = (failSum/failures)
+            
+        logEntry = {"user": user, "scheme": usersDict[user][0]["scheme"], "totalLogins":  successes + failures, "successes": successes, "failures": failures, "meanSucTime": meanSuccess, "meanFailTime": meanFailure}
+        
+        data.append(logEntry)
+        
+    return data
     
             
 def main():
@@ -114,7 +147,9 @@ def main():
     
     loginData = readLoginsCSV()
     
-    organizeByUser(loginData)
+    dataByUser = organizeByUser(loginData)
+    
+    writeUserDataToCSV(dataByUser)
     
 if __name__ == "__main__":
     main()
