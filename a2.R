@@ -83,27 +83,42 @@ loginData.subImage <- subset(loginData, loginData$scheme == 'unknown;ImagePassti
 
 loginBySchemeTotal <- list(loginData.subAZ$totalLogins, loginData.subBlank$totalLogins, loginData.subImage$totalLogins)
 
-loginBySchemeSucc <- list(loginData.subAZ$totalLogins, loginData.subBlank$totalLogins, loginData.subImage$totalLogins)
+loginBySchemeSucc <- list(loginData.subAZ$successes, loginData.subBlank$successes, loginData.subImage$successes)
 
-loginBySchemeFail <- list(loginData.subAZ$totalLogins, loginData.subBlank$totalLogins, loginData.subImage$totalLogins)
+loginBySchemeFail <- list(loginData.subAZ$failures, loginData.subBlank$failures, loginData.subImage$failures)
 
+colours = c("Red", "Purple", "Blue")
 
 library("plotrix")
-multhist(loginBySchemeTotal, xlab = "Total Logins", main = "Histogram for Total Logins")
+multhist(loginBySchemeTotal, xlab = "Total Logins", ylab = "Frequency", main = "Histogram for Total Logins", col = colours)
 
-multhist(loginBySchemeSucc, xlab = "Total Logins", main = "Histogram for Successful Logins")
+multhist(loginBySchemeSucc, xlab = "Total Successful Logins", ylab = "Frequency", main = "Histogram for Successful Logins", col = colours)
 
-multhist(loginBySchemeFail, xlab = "Total Logins", main = "Histogram for Failed Logins")
+multhist(loginBySchemeFail, xlab = "Total Unsuccessful Logins", ylab = "Frequency", main = "Histogram for Failed Logins", col = colours)
+
+legend("topright", c("Text28", "Blankpt28", "Imagept28"), col=c("red", "purple", "blue"), lwd=10)
+
+#Histogram 2 Login Time/User
+loginBySchemeSuccTime <- list(loginData.subAZ$meanSucTime, loginData.subBlank$meanSucTime, loginData.subImage$meanSucTime)
+
+loginBySchemeFailTime <- list(loginData.subAZ$meanFailTime, loginData.subBlank$meanFailTime, loginData.subImage$meanFailTime)
+
+multhist(loginBySchemeSuccTime, xlab = "Login Time", ylab = "Frequency", main = "Histogram for Successful Login Times", col = colours)
+
+multhist(loginBySchemeFailTime, xlab = "Login Time", ylab = "Frequency", main = "Histogram for Failed Login Times", col = colours)
+
 
 #Boxplot
 #x axis = login time
 #Two boxplots, successful and unsuccessful
 #one box per scheme
-boxplot(loginData$meanSucTime ~ loginData$scheme, ylab = "Login Time", xlab = "Passowrd Scheme", 
-        main = "Succesful Login Times")
+theNames = c("Text28", "Blankpt28", "Imagept28")
 
-boxplot(loginData$meanFailTime ~ loginData$scheme, ylab = "Login Time", xlab = "Passowrd Scheme", 
-        main = "Failure Login Times", outline = FALSE)
+boxplot(loginData$meanSucTime ~ loginData$scheme, ylab = "Login Time", xlab = "Password Scheme", 
+        main = "Boxplot for Succesful Login Times", col = colours, names = theNames)
+
+boxplot(loginData$meanFailTime ~ loginData$scheme, ylab = "Login Time", xlab = "Password Scheme", 
+        main = "Boxplot for Failure Login Times", outline = FALSE, col = colours, names = theNames)
 #outline = FALSE doesn't draw outliers
 
 
