@@ -6,28 +6,69 @@ ls.str(loginData) #lists columns as tells you what they are (char, num etc.)
 #loginData$user use this if only want this col, just looking at this col
   #can be used instead of loginData
 
+#Descriptive Stats
 #mean, std, median for
   #total, succ, fail - logins
   #succ, fail - login time
-mean(loginData$totalLogins)
-median(loginData$totalLogins)
-sd(loginData$totalLogins)
+mean(loginData.subAZ$totalLogins)
+median(loginData.subAZ$totalLogins)
+sd(loginData.subAZ$totalLogins)
 
-mean(loginData$successes)
-median(loginData$successes)
-sd(loginData$successes)
+mean(loginData.subBlank$totalLogins)
+median(loginData.subBlank$totalLogins)
+sd(loginData.subBlank$totalLogins)
 
-mean(loginData$failures)
-median(loginData$failures)
-sd(loginData$failures)
+mean(loginData.subImage$totalLogins)
+median(loginData.subImage$totalLogins)
+sd(loginData.subImage$totalLogins)
 
-mean(loginData$meanSucTime)
-median(loginData$meanSucTime)
-sd(loginData$meanSucTime)
+mean(loginData.subAZ$successes)
+median(loginData.subAZ$successes)
+sd(loginData.subAZ$successes)
 
-mean(loginData$meanFailTime)
-median(loginData$meanFailTime)
-sd(loginData$meanFailTime)
+mean(loginData.subBlank$successes)
+median(loginData.subBlank$successes)
+sd(loginData.subBlank$successes)
+
+mean(loginData.subImage$successes)
+median(loginData.subImage$successes)
+sd(loginData.subImage$successes)
+
+mean(loginData.subAZ$failures)
+median(loginData.subAZ$failures)
+sd(loginData.subAZ$failures)
+
+mean(loginData.subBlank$failures)
+median(loginData.subBlank$failures)
+sd(loginData.subBlank$failures)
+
+mean(loginData.subImage$failures)
+median(loginData.subImage$failures)
+sd(loginData.subImage$failures)
+
+mean(loginData.subAZ$meanSucTime)
+median(loginData.subAZ$meanSucTime)
+sd(loginData.subAZ$meanSucTime)
+
+mean(loginData.subBlank$meanSucTime)
+median(loginData.subBlank$meanSucTime)
+sd(loginData.subBlank$meanSucTime)
+
+mean(loginData.subImage$meanSucTime)
+median(loginData.subImage$meanSucTime)
+sd(loginData.subImage$meanSucTime)
+
+mean(loginData.subAZ$meanFailTime)
+median(loginData.subAZ$meanFailTime)
+sd(loginData.subAZ$meanFailTime)
+
+mean(loginData.subBlank$meanFailTime)
+median(loginData.subBlank$meanFailTime)
+sd(loginData.subBlank$meanFailTime)
+
+mean(loginData.subImage$meanFailTime)
+median(loginData.subImage$meanFailTime)
+sd(loginData.subImage$meanFailTime)
 
 #Histogram 1
 #multicategory -- scheme
