@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /*
  * This class will be a representation of our password scheme.
@@ -19,6 +20,29 @@ public class Password {
 		landscape  = land;
 		emojis     = emoji;
 		randomWord = word;
+	}
+	
+	// method to compare that two passwords are equal
+	public boolean equals(Password pw) {
+		
+		if (pw == null){ return false; }
+		
+		if (pw.randomWord != this.randomWord) {
+			return false;
+		}
+		
+		Collections.sort(pw.landscape);
+		Collections.sort(this.landscape);
+		if (pw.landscape != this.landscape) {
+			return false;
+		}
+		
+		Collections.sort(pw.emojis);
+		Collections.sort(this.emojis);
+		if (! pw.emojis.equals(this.emojis) ) {
+			return false;
+		}
+		return true ;
 	}
 	
 	public String getRandomWord() {

@@ -35,10 +35,13 @@ public class PasswordPanel extends javax.swing.JPanel {
 		textField.setBounds(275, 150, 100, 30);
 		textField.addFocusListener(new FocusListener(){
 			public void focusLost(FocusEvent e){
-				controller.handleTextEnter();
+				String t = new String(textField.getPassword());
+				controller.handleTextEnter(t);
+				// TODO: log end time
 			}
 			public void focusGained(FocusEvent e){
 				//do nothing, we don't care about this.
+				// TODO: log start time
 			}
 		});
 		add(textField);
