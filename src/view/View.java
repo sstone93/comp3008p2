@@ -26,7 +26,7 @@ public class View extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		passwordPanel = new PasswordPanel();
+		passwordPanel = new PasswordPanel(controller);
 		contentPane.add(passwordPanel);
 		
 		
