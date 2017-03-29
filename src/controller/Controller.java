@@ -3,6 +3,7 @@ package controller;
 import view.View;
 import model.*;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -45,11 +46,16 @@ public class Controller {
 	    FileHandler fh;  
  
 	    try {  
-	        // This block configure the logger with handler and formatter  
-	        fh = new FileHandler("C:/Users/Chantal/Documents/hcilog/temp.log");  
+	    	String filename = "logFile.txt";
+			String workingDirectory = System.getProperty("user.dir");
+
+			String absoluteFilePath = "";
+			absoluteFilePath = workingDirectory + File.separator + filename;
+
+			System.out.println("Final filepath : " + absoluteFilePath);
+	    	
+	        fh = new FileHandler(absoluteFilePath);  
 	        logger.addHandler(fh);
-	        SimpleFormatter formatter = new SimpleFormatter();  
-	        fh.setFormatter(formatter);  
 
 	        Date time = new java.util.Date();	        
 	        SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
