@@ -5,8 +5,13 @@ import model.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.*;
 
 public class Controller {
@@ -17,6 +22,9 @@ public class Controller {
 	
 	public Controller(){
 		//TODO: randomly assign a password here
+//		String randomWord = getRandomWord();
+		int[] wee = getThreeNumbers();
+		System.out.println(wee);
 		assignedPassword = new Password(/*take in assigned values */ );
 		
 		enteredPassword = new Password();
@@ -74,7 +82,89 @@ public class Controller {
 		//initialize the controller which opens the window
 		Controller controller = new Controller();
 		
-		logEvent("hey");
+	}
+	
+	public String getRandomWord() {
+//		InputStream fis = new FileInputString("words");
+//		INputStreamReader isr = new InputStreamReader(fis, Charset.forName("UTF-8"));
+//		BufferedReader br = new BufferedREader(isr);
+		String line32 = "";
+		try {
+			// TODO: 
+//			String absol = new File(".").getAbsolutePath();
+//			System.out.println(absol);
+			
+//			ClassLoader classLoader = getClass().getClassLoader();
+//			File file = new File(classLoader.getResource("words").getFile());
+			
+//			String workingDirectory = System.getProperty("user.dir");
+			File file = new File("../../resources/words.txt");
+			
+			System.out.println("delete this when you get it working");
+			URL f = Controller.class.getClassLoader().getResource(file.getPath());
+			System.out.println(file);
+//			line = Files.readAllLines(Paths.get(file.getPath()));
+			
+			line32 = Files.readAllLines(Paths.get(file.getPath())).get(32);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println(line32);
+		return line32;
+	}
+	
+	public void getRandomEmojis() {
+		int[] nums = getThreeNumbers();
+		
+	}
+	
+	public void getRandomLandscape() {
+		int[] nums = getThreeNumbers();
+		
+	}
+	
+	public static int[] getThreeNumbers() {
+		int count  = 0;
+		int image1 = 0;
+		int image2 = 0;
+		int image3 = 0;
+		
+		System.out.println("heyyo");
+		while (count < 3) {
+			int num = getRandomNumber(1, 16);
+			if (image1 == 0) {
+				image1 = num;
+				count++;
+			} else if (image2 == 0) {
+				if (checkAllowed(image1, num)){
+					image2 = num;
+					count++;
+				}
+			} else if (image3 == 0) {
+				if (checkAllowed(image1, num) && checkAllowed(image2, num)){
+					image3 = num;
+					count++;
+				}
+			}
+		}
+		int[] three = {image1, image2, image3};
+		return three;
+	}
+	
+	// OUTPUT: true - two integers are not equal
+	// 		   false - two integers are equal
+	public static boolean checkAllowed(int current, int suggested) {
+		if (current != suggested) {
+			return true;
+		}
+		return false;
+	}
+	
+	public static int getRandomNumber(int min, int max) {
+		int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
+		return randomNum;
 	}
 
 }
