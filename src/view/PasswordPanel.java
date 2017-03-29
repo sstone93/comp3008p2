@@ -7,6 +7,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -59,6 +60,12 @@ public class PasswordPanel extends javax.swing.JPanel {
 		for (int i = 0; i < 16; i++){
 			/*BufferedImage buttonIcon = ImageIO.read(new File(""));
 			button = new JButton(new ImageIcon(buttonIcon));*/
+			try{
+				BufferedImage buttonIcon = ImageIO.read(this.getClass().getResource("/resources/e" + (i+1) + ".png"));
+			}catch(IOException e){
+				System.out.println("IT DIDN'T WORK");
+			}
+			System.out.println("I think it worked");
 			emojiButtons[i] = new JButton("Testing");
 			emojiButtons[i].setBounds(xStart + (i%gridSize) * buttonSize, yStart + (i/gridSize) * buttonSize, buttonSize, buttonSize);
 			//emojiButtons[i].setText("testing");
