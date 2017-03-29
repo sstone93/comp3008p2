@@ -22,7 +22,7 @@ public class Controller {
 	
 	public Controller(){
 		//TODO: randomly assign a password here
-//		String randomWord = getRandomWord();
+		String randomWord = getRandomWord();
 		int[] wee = getThreeNumbers();
 		System.out.println(wee);
 		assignedPassword = new Password(/*take in assigned values */ );
@@ -77,12 +77,6 @@ public class Controller {
 	        e.printStackTrace();  
 	    }  
 	}
-
-	public static void main(String[] args) {
-		//initialize the controller which opens the window
-		Controller controller = new Controller();
-		
-	}
 	
 	public String getRandomWord() {
 //		InputStream fis = new FileInputString("words");
@@ -98,14 +92,15 @@ public class Controller {
 //			File file = new File(classLoader.getResource("words").getFile());
 			
 //			String workingDirectory = System.getProperty("user.dir");
-			File file = new File("../../resources/words.txt");
+			File file = new File("resources/words");
 			
-			System.out.println("delete this when you get it working");
-			URL f = Controller.class.getClassLoader().getResource(file.getPath());
-			System.out.println(file);
+//			System.out.println("delete this when you get it working");
+//			URL f = Controller.class.getClassLoader().getResource("words.txt");
+//			System.out.println(f);
+			
 //			line = Files.readAllLines(Paths.get(file.getPath()));
-			
-			line32 = Files.readAllLines(Paths.get(file.getPath())).get(32);
+			int randNum = getRandomNumber(0, 1024);
+			line32 = Files.readAllLines(Paths.get(file.getPath())).get(32); // TODO: Change this to rand
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -165,6 +160,12 @@ public class Controller {
 	public static int getRandomNumber(int min, int max) {
 		int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
 		return randomNum;
+	}
+	
+	public static void main(String[] args) {
+		//initialize the controller which opens the window
+		Controller controller = new Controller();
+		
 	}
 
 }
