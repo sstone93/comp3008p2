@@ -54,19 +54,21 @@ public class PasswordPanel extends javax.swing.JPanel {
 		
 		int buttonSize = 72;
 		int gridSize = 4;
-		int xStart = 5;
+		int xStart = 650;
 		int yStart = 5;
 		
 		for (int i = 0; i < 16; i++){
 			/*BufferedImage buttonIcon = ImageIO.read(new File(""));
 			button = new JButton(new ImageIcon(buttonIcon));*/
+			
 			try{
 				BufferedImage buttonIcon = ImageIO.read(this.getClass().getResource("/resources/e" + (i+1) + ".png"));
+				emojiButtons[i] = new JButton(new ImageIcon(buttonIcon));
 			}catch(IOException e){
 				System.out.println("IT DIDN'T WORK");
 			}
-			System.out.println("I think it worked");
-			emojiButtons[i] = new JButton("Testing");
+			
+			emojiButtons[i].setName("e" + (i+1));
 			emojiButtons[i].setBounds(xStart + (i%gridSize) * buttonSize, yStart + (i/gridSize) * buttonSize, buttonSize, buttonSize);
 			//emojiButtons[i].setText("testing");
 			add(emojiButtons[i]);
