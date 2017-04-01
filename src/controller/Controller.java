@@ -10,6 +10,8 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.*;
@@ -22,9 +24,10 @@ public class Controller {
 	
 	public Controller(){
 		//TODO: randomly assign a password here
-		String randomWord = getRandomWord();
-		int[] wee = getThreeNumbers();
-		System.out.println(wee);
+//		String randomWord = getRandomWord();
+		ArrayList<String> assignedEmojis = getThreeNumbers("e");
+		ArrayList<String> assignedLandscape = getThreeNumbers("l");
+		
 		assignedPassword = new Password(/*take in assigned values */ );
 		
 		enteredPassword = new Password();
@@ -98,9 +101,18 @@ public class Controller {
 //			URL f = Controller.class.getClassLoader().getResource("words.txt");
 //			System.out.println(f);
 			
+			URL loc = this.getClass().getResource("resources");
+			String l = loc.getPath();
+			System.out.println(l);
+			
 //			line = Files.readAllLines(Paths.get(file.getPath()));
 			int randNum = getRandomNumber(0, 1024);
-			line32 = Files.readAllLines(Paths.get(file.getPath())).get(32); // TODO: Change this to rand
+			
+			URL test = this.getClass().getResource("/resources/words.txt");
+			String absolutePath = new File("lib/dummy.exe").getAbsolutePath();
+//			File f = new File()
+//			test.toString();
+			line32 = Files.readAllLines(Paths.get(test.toString())).get(32); // TODO: Change this to rand
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -110,23 +122,22 @@ public class Controller {
 		return line32;
 	}
 	
-	public void getRandomEmojis() {
-		int[] nums = getThreeNumbers();
+	public ArrayList<String> getRandomEmojis() {
+		return getThreeNumbers("e");
 		
 	}
 	
-	public void getRandomLandscape() {
-		int[] nums = getThreeNumbers();
-		
+	public ArrayList<String> getRandomLandscape() {
+		return getThreeNumbers("l");
 	}
 	
-	public static int[] getThreeNumbers() {
+	public static ArrayList<String> getThreeNumbers(String letter) {
 		int count  = 0;
 		int image1 = 0;
 		int image2 = 0;
 		int image3 = 0;
+		ArrayList<String> nums = new ArrayList<String>(3);
 		
-		System.out.println("heyyo");
 		while (count < 3) {
 			int num = getRandomNumber(1, 16);
 			if (image1 == 0) {
@@ -144,8 +155,9 @@ public class Controller {
 				}
 			}
 		}
-		int[] three = {image1, image2, image3};
-		return three;
+		
+		Collections.addAll(nums, letter+image1, letter+image2, letter+image3);
+		return nums;
 	}
 	
 	// OUTPUT: true - two integers are not equal
