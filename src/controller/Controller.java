@@ -2,6 +2,9 @@ package controller;
 
 import view.View;
 import model.*;
+import model.MainModel.LOGIN_STATUS;
+import model.MainModel.MODE;
+import model.MainModel.TYPE;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,35 +14,92 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.*;
-import java.util.Scanner; 
+import java.util.Scanner;
+import java.util.Set; 
 
 public class Controller {
 	
 	private View view;
-	private Password assignedPassword; // password system gives them
+	private MainModel mainModel;
+	private Password assignedPasswordFB; // password system gives them
+	private Password assignedPasswordBank; // password system gives them
+	private Password assignedPasswordSchool; // password system gives them
 	private Password enteredPassword; // what they give us
+	private ArrayList<TYPE> randomOrder = new ArrayList<TYPE>(6);
 	
 	public Controller() {
-		String randomWord = getRandomWord();
-		ArrayList<String> assignedEmojis = getThreeNumbers("e");
-		ArrayList<String> assignedLandscape = getThreeNumbers("l");
 		
-		assignedPassword = new Password(randomWord, assignedLandscape, assignedEmojis );
+		mainModel = new MainModel();
+		
+		for (int i = 0; i < 3; i++) {
+			String randomWord = getRandomWord();
+			ArrayList<String> assignedEmojis = getThreeNumbers("e");
+			ArrayList<String> assignedLandscape = getThreeNumbers("l");
+			
+			if (i == 0) {
+				assignedPasswordFB = new Password(randomWord, assignedLandscape, assignedEmojis );
+				mainModel.addAssignedPassword(TYPE.FACEBOOK, assignedPasswordFB); 
+			} else if (i == 1) {
+				assignedPasswordBank = new Password(randomWord, assignedLandscape, assignedEmojis);
+				mainModel.addAssignedPassword(TYPE.BANK, assignedPasswordBank);
+			} else {
+				assignedPasswordSchool = new Password(randomWord, assignedLandscape, assignedEmojis);
+				mainModel.addAssignedPassword(TYPE.SCHOOL, assignedPasswordSchool);
+			}
+		}
+		
+//		ArrayList<TYPE> createMe = 
+		
+		randomOrder.addAll(createRandomOrder());
+		Collections.shuffle(randomOrder);
+		randomOrder.addAll(createRandomOrder());
+		
+		System.out.println(randomOrder);
 		enteredPassword = new Password();
 		
-		System.out.println(assignedPassword.equals( enteredPassword));
+		
+		
 		view = new View(this);
 		view.setVisible(true);
 	}
 	
+	public Set<TYPE> createRandomOrder() {
+		 Set<TYPE> keys = mainModel.getAssignedPasswords().keySet();
+		 return keys;
+	}
+	
 	public void handleSubmit(){
+		Password assignedPassword = getPasswordBasedOnType();
 		boolean success = assignedPassword == enteredPassword;
 		
 		// TODO: change the state based off of success
+		mainModel.changeCurrentMode(MODE.PASSWORD_ENTERED);
 		
 		String event = success ? "success" : "failure";
+		if (success) {
+			mainModel.changeLoginStatus(LOGIN_STATUS.SUCCESS);
+		} else {
+			mainModel.changeLoginStatus(LOGIN_STATUS.FAILURE);
+			mainModel.addAttempt();
+		}
 		// log success or failure event
 		logEvent("user,scheme,login," + event);	
+		
+//		TODO: create logic for getting the password/mode needed
+//		view.update();
+		
+		MODE currentMode = mainModel.getCurrentMode();
+		
+		if (currentMode == MODE.TRAINING) {
+			
+		} else if (currentMode == MODE.TESTING) {
+			if (!success) {
+				if (mainModel.getAttempts() > 3) {
+//					TODO: logic here
+				}
+				
+			}
+		}
 	}
 	
 	
@@ -58,6 +118,17 @@ public class Controller {
 	public void handleLandscapeClicked(String landscapeID){
 		enteredPassword.addLandscape(landscapeID);
 		//TODO: update number of landscapes clicked
+	}
+	
+	public Password getPasswordBasedOnType() {
+		TYPE ct = mainModel.getCurrentType();
+		if (ct == TYPE.FACEBOOK) {
+			return assignedPasswordFB;
+		} else if (ct == TYPE.BANK) {
+			return assignedPasswordBank;
+		} else {
+			return assignedPasswordSchool;
+		}
 	}
 	
 	// Input: A string to be logged in the specified format
@@ -89,6 +160,10 @@ public class Controller {
 	    } catch (IOException e) {  
 	        e.printStackTrace();  
 	    }  
+	}
+	
+	public MainModel getMainModel() {
+		return mainModel;
 	}
 	
 	public String getRandomWord() {
