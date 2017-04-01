@@ -5,16 +5,13 @@ import model.*;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.*;
+import java.util.Scanner; 
 
 public class Controller {
 	
@@ -24,7 +21,7 @@ public class Controller {
 	
 	public Controller(){
 		//TODO: randomly assign a password here
-//		String randomWord = getRandomWord();
+		String randomWord = getRandomWord();
 		ArrayList<String> assignedEmojis = getThreeNumbers("e");
 		ArrayList<String> assignedLandscape = getThreeNumbers("l");
 		
@@ -82,44 +79,29 @@ public class Controller {
 	}
 	
 	public String getRandomWord() {
-//		InputStream fis = new FileInputString("words");
-//		INputStreamReader isr = new InputStreamReader(fis, Charset.forName("UTF-8"));
-//		BufferedReader br = new BufferedREader(isr);
-		String line32 = "";
-		try {
-			// TODO: 
-//			String absol = new File(".").getAbsolutePath();
-//			System.out.println(absol);
-			
-//			ClassLoader classLoader = getClass().getClassLoader();
-//			File file = new File(classLoader.getResource("words").getFile());
-			
-//			String workingDirectory = System.getProperty("user.dir");
-			File file = new File("resources/words");
-			
-//			System.out.println("delete this when you get it working");
-//			URL f = Controller.class.getClassLoader().getResource("words.txt");
-//			System.out.println(f);
-			
-			URL loc = this.getClass().getResource("resources");
-			String l = loc.getPath();
-			System.out.println(l);
-			
-//			line = Files.readAllLines(Paths.get(file.getPath()));
-			int randNum = getRandomNumber(0, 1024);
-			
-			URL test = this.getClass().getResource("/resources/words.txt");
-			String absolutePath = new File("lib/dummy.exe").getAbsolutePath();
-//			File f = new File()
-//			test.toString();
-			line32 = Files.readAllLines(Paths.get(test.toString())).get(32); // TODO: Change this to rand
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		System.out.println(line32);
-		return line32;
+            System.out.println(this.getClass().getResource("/resources/word.txt"));
+            System.out.println(System.getProperty("user.dir"));
+     
+            Scanner x;
+            int randNum;
+            int count = 0;
+            String randWord = "";
+            System.out.println("before try");
+            try{
+                
+                x = new Scanner(new File("/resources/words.txt"));
+                randNum = getRandomNumber(0, 1024);
+                
+                while (count < randNum){
+                    count++;
+                    randWord = x.nextLine();
+                }
+            }
+            catch (Exception e){
+                System.out.println("Could not find file");
+            }
+            System.out.println(randWord);
+            return randWord;
 	}
 	
 	public static ArrayList<String> getThreeNumbers(String letter) {
