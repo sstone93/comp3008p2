@@ -67,10 +67,17 @@ public class PasswordPanel extends javax.swing.JPanel {
 			}catch(IOException e){
 				System.out.println("IT DIDN'T WORK");
 			}
+			final String id = "e" + (i + 1);
 			
-			emojiButtons[i].setName("e" + (i+1));
+			emojiButtons[i].setName(id);
 			emojiButtons[i].setBounds(xStart + (i%gridSize) * buttonSize, yStart + (i/gridSize) * buttonSize, buttonSize, buttonSize);
-			//emojiButtons[i].setText("testing");
+			
+			emojiButtons[i].addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent e){
+					controller.handleEmojiClicked(id);
+				}
+			});
+			
 			add(emojiButtons[i]);
 		}
 		
