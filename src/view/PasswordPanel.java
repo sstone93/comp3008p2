@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -32,34 +31,62 @@ public class PasswordPanel extends javax.swing.JPanel {
 		setLayout(null);
 		
 		JLabel label = new JLabel("Enter text");
-		label.setBounds(440, 110, 100, 30);
+
+		label.setFont (label.getFont ().deriveFont (24.0f));
+		label.setBounds(400, 110, 180, 30);
 		add(label);
 		
 		textField = new JPasswordField("");
-		textField.setBounds(440, 150, 100, 30);
+		textField.setBounds(400, 150, 180, 30);
+		textField.setFont(textField.getFont().deriveFont(24.0f));
 		textField.addFocusListener(new FocusListener(){
 			public void focusLost(FocusEvent e){
 				String t = new String(textField.getPassword());
 				controller.handleTextEnter(t);
-				// TODO: log end time
+				// TODO: log end time in controller
 			}
 			public void focusGained(FocusEvent e){
 				//do nothing, we don't care about this.
-				// TODO: log start time
+				// TODO: log start time in controller
 			}
 		});
 		add(textField);
 		
-		emojiButtons = new JButton[16];
-		
 		int buttonSize = 72;
 		int gridSize = 4;
-		int xStart = 650;
-		int yStart = 5;
+		int xStart = 15;
+		int yStart = 10;
+		
+		imageButtons = new JButton[16];
 		
 		for (int i = 0; i < 16; i++){
-			/*BufferedImage buttonIcon = ImageIO.read(new File(""));
-			button = new JButton(new ImageIcon(buttonIcon));*/
+			
+			try{
+				BufferedImage buttonIcon = ImageIO.read(this.getClass().getResource("/resources/l" + (i+1) + ".jpg"));
+				imageButtons[i] = new JButton(new ImageIcon(buttonIcon));
+			}catch(IOException e){
+				System.out.println("IT DIDN'T WORK");
+			}
+			
+			final String id = "i" + (i + 1);
+			
+			imageButtons[i].setName(id);
+			imageButtons[i].setBounds(xStart + (i%gridSize) * buttonSize, yStart + (i/gridSize) * buttonSize, buttonSize, buttonSize);
+			
+			imageButtons[i].addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent e){
+					controller.handleLandscapeClicked(id);
+				}
+			});
+			
+			add(imageButtons[i]);
+		}
+		
+		xStart = 670;
+		emojiButtons = new JButton[16];
+		
+		for (int i = 0; i < 16; i++){
+			//System.out.println(this.getClass().getResource("/resources/words.txt"));
 			
 			try{
 				BufferedImage buttonIcon = ImageIO.read(this.getClass().getResource("/resources/e" + (i+1) + ".png"));
@@ -89,10 +116,7 @@ public class PasswordPanel extends javax.swing.JPanel {
 			}
 		});
 		
-		
-		
-		
-		submitButton.setBounds(850, 320, 75, 30);
+		submitButton.setBounds(880, 330, 75, 30);
 		add(submitButton);
 	}
 
