@@ -47,20 +47,20 @@ public class Controller {
 				mainModel.addAssignedPassword(TYPE.SCHOOL, assignedPasswordSchool);
 			}
 		}
+		// Create the random order in which passwords will be tested
+		ArrayList<TYPE> passwordOrder = new ArrayList<TYPE>();
+		passwordOrder.addAll(createRandomOrder());
+		Collections.shuffle(passwordOrder);
 		
-//		ArrayList<TYPE> createMe = 
+		randomOrder.addAll(passwordOrder);
+		Collections.shuffle(passwordOrder);
+		randomOrder.addAll(passwordOrder);
 		
-		randomOrder.addAll(createRandomOrder());
-		Collections.shuffle(randomOrder);
-		randomOrder.addAll(createRandomOrder());
-		
-		System.out.println(randomOrder);
 		enteredPassword = new Password();
-		
-		
 		
 		view = new View(this);
 		view.setVisible(true);
+		
 	}
 	
 	public Set<TYPE> createRandomOrder() {
@@ -82,26 +82,48 @@ public class Controller {
 			mainModel.changeLoginStatus(LOGIN_STATUS.FAILURE);
 			mainModel.addAttempt();
 		}
-		// log success or failure event
-		logEvent("user,scheme,login," + event);	
 		
-//		TODO: create logic for getting the password/mode needed
+		
+//		TODO: uncomment this when view has it
 //		view.update();
 		
 		MODE currentMode = mainModel.getCurrentMode();
 		
 		if (currentMode == MODE.TRAINING) {
+			if (success) {
+//				logEvent("user,ourScheme,login," + event);
+				mainModel.addAttempt();
+				if (mainModel.getAttempts() >= 2) {
+					// changeModeTraining(); 
+				}
+			}
 			
 		} else if (currentMode == MODE.TESTING) {
-			if (!success) {
-				if (mainModel.getAttempts() > 3) {
-//					TODO: logic here
-				}
+			
+			if (success) {
+				logEvent("user,ourScheme,login," + event);
+				changeModeTesting();
 				
+			} else {
+				if (mainModel.getAttempts() > 3) {
+					// log failure event
+					logEvent("user,ourScheme,login," + event);	
+					changeModeTesting();
+				}
 			}
 		}
 	}
 	
+	public boolean changeModeTesting() {
+		if (randomOrder.size() == 1) { // this was the last type
+			mainModel.changeCurrentMode(MODE.FINISHED);
+			mainModel.resetAttempts();
+			return false;
+		}
+		randomOrder.remove(0);
+		mainModel.changeCurrentType(randomOrder.get(0));
+		return true;
+	}
 	
 	public void handleTextEnter(String textpw){
 		enteredPassword.setRandomWord(textpw);
