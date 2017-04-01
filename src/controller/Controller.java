@@ -39,6 +39,14 @@ public class Controller {
 		enteredPassword.setRandomWord(textpw);
 	}
 	
+	public void handleEmojiClicked(String emojiID){
+		//add emoji to list of emojis
+	}
+	
+	public void handleLandscapeClicked(String landscapeID){
+		//add landscape to the list of landscapes
+	}
+	
 	// Input: A string to be logged in the specified format
 	// FORMAT: user,scheme,mode,event
 	public static void logEvent(String logMe) {
