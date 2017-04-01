@@ -17,7 +17,8 @@ import controller.Controller;
 @SuppressWarnings("serial")
 public class PasswordPanel extends javax.swing.JPanel {
 	
-	private JPasswordField textField;
+	private JPasswordField entryTextField;
+	private JTextField displayTextField;
 	private JButton[] imageButtons;
 	private JButton[] emojiButtons;
 	private JButton submitButton;
@@ -36,12 +37,12 @@ public class PasswordPanel extends javax.swing.JPanel {
 		label.setBounds(400, 110, 180, 30);
 		add(label);
 		
-		textField = new JPasswordField("");
-		textField.setBounds(400, 150, 180, 30);
-		textField.setFont(textField.getFont().deriveFont(24.0f));
-		textField.addFocusListener(new FocusListener(){
+		entryTextField = new JPasswordField("");
+		entryTextField.setBounds(400, 150, 180, 30);
+		entryTextField.setFont(entryTextField.getFont().deriveFont(24.0f));
+		entryTextField.addFocusListener(new FocusListener(){
 			public void focusLost(FocusEvent e){
-				String t = new String(textField.getPassword());
+				String t = new String(entryTextField.getPassword());
 				controller.handleTextEnter(t);
 				// TODO: log end time in controller
 			}
@@ -50,7 +51,13 @@ public class PasswordPanel extends javax.swing.JPanel {
 				// TODO: log start time in controller
 			}
 		});
-		add(textField);
+		add(entryTextField);
+		
+		displayTextField = new JTextField("");
+		displayTextField.setBounds(400, 190, 180, 30);
+		displayTextField.setFont(displayTextField.getFont().deriveFont(24.0f));
+		displayTextField.setEditable(false);
+		add(displayTextField);
 		
 		int buttonSize = 72;
 		int gridSize = 4;
