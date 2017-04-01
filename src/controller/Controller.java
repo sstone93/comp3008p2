@@ -19,15 +19,15 @@ public class Controller {
 	private Password assignedPassword; // password system gives them
 	private Password enteredPassword; // what they give us
 	
-	public Controller(){
-		//TODO: randomly assign a password here
+	public Controller() {
 		String randomWord = getRandomWord();
 		ArrayList<String> assignedEmojis = getThreeNumbers("e");
 		ArrayList<String> assignedLandscape = getThreeNumbers("l");
 		
-		assignedPassword = new Password(/*take in assigned values */ );
-		
+		assignedPassword = new Password(randomWord, assignedLandscape, assignedEmojis );
 		enteredPassword = new Password();
+		
+		System.out.println(assignedPassword.equals( enteredPassword));
 		view = new View(this);
 		view.setVisible(true);
 	}
@@ -45,14 +45,19 @@ public class Controller {
 	
 	public void handleTextEnter(String textpw){
 		enteredPassword.setRandomWord(textpw);
+		//TODO: update that password has been entered
 	}
 	
+	//adds emoji to list of emojis in the users enteredPassword
 	public void handleEmojiClicked(String emojiID){
-		//add emoji to list of emojis
+		enteredPassword.addEmoji(emojiID);
+		//TODO: update number of landscapes clicked
 	}
 	
+	//add landscape to the list of landscapes in the users entered password
 	public void handleLandscapeClicked(String landscapeID){
-		//add landscape to the list of landscapes
+		enteredPassword.addLandscape(landscapeID);
+		//TODO: update number of landscapes clicked
 	}
 	
 	// Input: A string to be logged in the specified format
