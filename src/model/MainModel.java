@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MainModel {
-	public enum MODE {TRAINING, TESTING, PASSWORD_ENTERED };
+	public enum MODE {TRAINING, TESTING, PASSWORD_ENTERED, FINISHED };
 	public enum LOGIN_STATUS { SUCCESS, FAILURE};
 	public enum TYPE { BANK, FACEBOOK, SCHOOL};
 	private HashMap<TYPE, Password> assignedPasswords = new HashMap<TYPE, Password>(3);
@@ -30,6 +30,10 @@ public class MainModel {
 	
 	public int getAttempts() {
 		return attempts;
+	}
+	
+	public void resetAttempts() {
+		attempts = 0;
 	}
 	
 	public void addAttempt() {
