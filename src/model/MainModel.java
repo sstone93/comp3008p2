@@ -7,17 +7,24 @@ public class MainModel {
 	public enum MODE {TRAINING, TESTING, PASSWORD_ENTERED, FINISHED };
 	public enum LOGIN_STATUS { SUCCESS, FAILURE};
 	public enum TYPE { BANK, FACEBOOK, SCHOOL};
+	public enum PW_STATE { LANDSCAPE, WORDS, EMOJI };
 	private HashMap<TYPE, Password> assignedPasswords = new HashMap<TYPE, Password>(3);
 	private TYPE currentType;
 	private MODE currentMode;
+	private PW_STATE currentPwState;
 	private LOGIN_STATUS currentStatus;
 	private int attempts;
+	private int landscapeEntered;
+	private int emojiEntered;
 	
 	public MainModel() {
 		currentType = TYPE.BANK;
 		currentMode = MODE.TRAINING;
 		currentStatus = LOGIN_STATUS.FAILURE;
+		currentPwState = PW_STATE.LANDSCAPE;
 		attempts = 0;
+		landscapeEntered = 0;
+		emojiEntered = 0;
 	}
 	
 	public HashMap<TYPE, Password> getAssignedPasswords() {
@@ -26,6 +33,35 @@ public class MainModel {
 	
 	public void addAssignedPassword(TYPE key, Password value) {
 		assignedPasswords.put(key, value);
+	}
+	
+	public void changePasswordState(PW_STATE newPw) {
+		currentPwState = newPw;
+	}
+	
+	public PW_STATE getPasswordState() {
+		return currentPwState;
+	}
+	
+	public int getLandscapeEntered() {
+		return landscapeEntered;
+	}
+	
+	public void addLandscapeEntered() {
+		landscapeEntered++;
+	}
+	
+	public int getEmojiEntered() {
+		return emojiEntered;
+	}
+	
+	public void addEmojiEntered() {
+		emojiEntered++;
+	}
+	
+	public void resetEmojiAndLandscape() {
+		emojiEntered = 0;
+		landscapeEntered = 0;
 	}
 	
 	public int getAttempts() {
