@@ -79,17 +79,13 @@ public class Controller {
 	}
 	
 	public String getRandomWord() {
-            System.out.println(this.getClass().getResource("/resources/word.txt"));
-            System.out.println(System.getProperty("user.dir"));
-     
             Scanner x;
             int randNum;
             int count = 0;
             String randWord = "";
-            System.out.println("before try");
             try{
                 
-                x = new Scanner(new File("/resources/words.txt"));
+                x = new Scanner(new File("./src/resources/words.txt"));
                 randNum = getRandomNumber(0, 1024);
                 
                 while (count < randNum){
@@ -100,7 +96,6 @@ public class Controller {
             catch (Exception e){
                 System.out.println("Could not find file");
             }
-            System.out.println(randWord);
             return randWord;
 	}
 	
