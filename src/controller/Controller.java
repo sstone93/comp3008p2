@@ -122,15 +122,6 @@ public class Controller {
 		return line32;
 	}
 	
-	public ArrayList<String> getRandomEmojis() {
-		return getThreeNumbers("e");
-		
-	}
-	
-	public ArrayList<String> getRandomLandscape() {
-		return getThreeNumbers("l");
-	}
-	
 	public static ArrayList<String> getThreeNumbers(String letter) {
 		int count  = 0;
 		int image1 = 0;
