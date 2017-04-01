@@ -4,6 +4,7 @@ import view.View;
 import model.*;
 import model.MainModel.LOGIN_STATUS;
 import model.MainModel.MODE;
+import model.MainModel.PW_STATE;
 import model.MainModel.TYPE;
 
 import java.io.File;
@@ -94,7 +95,7 @@ public class Controller {
 //				logEvent("user,ourScheme,login," + event);
 				mainModel.addAttempt();
 				if (mainModel.getAttempts() >= 2) {
-					// changeModeTraining(); 
+					changeModeTraining(); 
 				}
 			}
 			
@@ -114,32 +115,56 @@ public class Controller {
 		}
 	}
 	
-	public boolean changeModeTesting() {
+	// changes the type for when user is training
+	// if they've reached the last app to train, it changes the mode to testing
+	// and sets the password state
+	public void changeModeTraining() {
+		if (mainModel.getCurrentType() == TYPE.FACEBOOK) {
+			mainModel.changeCurrentType(TYPE.BANK);
+		}
+		else if (mainModel.getCurrentType() == TYPE.BANK) {
+			mainModel.changeCurrentType(TYPE.SCHOOL);
+		} else {
+			mainModel.changeCurrentMode(MODE.TESTING);
+			mainModel.changeCurrentType(randomOrder.get(0));
+		}
+	}
+	
+	public void changeModeTesting() {
 		if (randomOrder.size() == 1) { // this was the last type
 			mainModel.changeCurrentMode(MODE.FINISHED);
 			mainModel.resetAttempts();
-			return false;
 		}
 		randomOrder.remove(0);
 		mainModel.changeCurrentType(randomOrder.get(0));
-		return true;
 	}
 	
 	public void handleTextEnter(String textpw){
 		enteredPassword.setRandomWord(textpw);
 		//TODO: update that password has been entered
+		mainModel.changePasswordState(PW_STATE.EMOJI);
 	}
 	
 	//adds emoji to list of emojis in the users enteredPassword
 	public void handleEmojiClicked(String emojiID){
 		enteredPassword.addEmoji(emojiID);
+		mainModel.addEmojiEntered();
+		if (mainModel.getEmojiEntered() >= 3) {
+			mainModel.changePasswordState(PW_STATE.LANDSCAPE);
+			mainModel.resetAttempts();
+		}
 		//TODO: update number of landscapes clicked
 	}
 	
 	//add landscape to the list of landscapes in the users entered password
 	public void handleLandscapeClicked(String landscapeID){
 		enteredPassword.addLandscape(landscapeID);
-		//TODO: update number of landscapes clicked
+		
+		mainModel.addLandscapeEntered(); // updates number of times user has clicked
+		if (mainModel.getLandscapeEntered() >= 3) {
+			mainModel.changePasswordState(PW_STATE.WORDS);
+			mainModel.resetAttempts();
+		}
 	}
 	
 	public Password getPasswordBasedOnType() {
