@@ -78,6 +78,7 @@ public class Controller {
 		
 		// TODO: change the state based off of success
 		mainModel.changeCurrentMode(MODE.PASSWORD_ENTERED);
+		mainModel.changePasswordState(PW_STATE.LANDSCAPE);
 		
 		String event = success ? "success" : "failure";
 		if (success) {
@@ -170,7 +171,6 @@ public class Controller {
 		enteredPassword.addEmoji(emojiID);
 		mainModel.addEmojiEntered();
 		if (mainModel.getEmojiEntered() >= 3) {
-			mainModel.changePasswordState(PW_STATE.LANDSCAPE);
 			mainModel.resetAttempts();
 		}
 		view.update();
