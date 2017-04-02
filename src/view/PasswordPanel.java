@@ -10,7 +10,6 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
 import controller.Controller;
@@ -147,7 +146,6 @@ public class PasswordPanel extends javax.swing.JPanel {
 		});
 		showCheckBox.setBounds(600, 330, 150, 30);
 		add(showCheckBox);
-		update();
 	}
 	
 	public void update(){
@@ -158,6 +156,7 @@ public class PasswordPanel extends javax.swing.JPanel {
 			if(showCheckBox.isSelected()){
 				Password password = model.getAssignedPasswords().get(model.getCurrentType());
 				displayTextField.setText(password.getRandomWord());
+				displayTextField.setVisible(true);
 				System.out.println(password.getEmojis());
 				System.out.println(password.getLandscape());
 				for(int i = 0; i < 16; i++){
@@ -174,14 +173,30 @@ public class PasswordPanel extends javax.swing.JPanel {
 			}
 			else{
 				displayTextField.setText("");
+				displayTextField.setVisible(false);
 				for(int i = 0; i < 16; i++){
 					emojiButtons[i].setBorderPainted(false);
 					imageButtons[i].setBorderPainted(false);
 				}
 			}
+			//TODO:Check if they can move on and show the next button if so
 			
 		}
+		else if (model.getCurrentMode() == MainModel.MODE.TESTING){
+			displayTextField.setText("");
+			displayTextField.setVisible(false);
+			
+			for(int i = 0; i < 16; i++){
+				emojiButtons[i].setBorderPainted(false);
+				imageButtons[i].setBorderPainted(false);
+			}
+			
+			nextButton.setVisible(false);
+			showCheckBox.setVisible(false);
+		}
+		//TODO:Add dialogs when in other modes
 		
+		//Only the area the user is currently entering should be visible
 		if(model.getPasswordState() == MainModel.PW_STATE.LANDSCAPE){
 			entryTextField.setEnabled(false);
 			for(int i = 0; i < 16; i++){
