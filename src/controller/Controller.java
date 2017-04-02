@@ -121,6 +121,7 @@ public class Controller {
  				}
  			}
 		}
+		view.update();
 	}
 	
 	// Handles on click even for next button during training
@@ -161,6 +162,7 @@ public class Controller {
 	public void handleTextEnter(String textpw){
 		enteredPassword.setRandomWord(textpw);
 		mainModel.changePasswordState(PW_STATE.EMOJI);
+		view.update();
 	}
 	
 	//adds emoji to list of emojis in the users enteredPassword
@@ -171,6 +173,7 @@ public class Controller {
 			mainModel.changePasswordState(PW_STATE.LANDSCAPE);
 			mainModel.resetAttempts();
 		}
+		view.update();
 	}
 	
 	//add landscape to the list of landscapes in the users entered password
@@ -189,7 +192,7 @@ public class Controller {
 			mainModel.changePasswordState(PW_STATE.WORDS);
 			mainModel.resetAttempts();
 		}
-		
+        view.update();
 	}
 	
     // grabs the correct password based on what password user is trying to enter

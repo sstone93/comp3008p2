@@ -147,6 +147,7 @@ public class PasswordPanel extends javax.swing.JPanel {
 		});
 		showCheckBox.setBounds(600, 330, 150, 30);
 		add(showCheckBox);
+		update();
 	}
 	
 	public void update(){
@@ -161,11 +162,8 @@ public class PasswordPanel extends javax.swing.JPanel {
 				System.out.println(password.getLandscape());
 				for(int i = 0; i < 16; i++){
 					if (password.getEmojis().contains("e" + (i + 1))){
-						//emojiButtons[i].setSelected(true);
 						emojiButtons[i].setBorder(new LineBorder(Color.RED));
 						emojiButtons[i].setBorderPainted(true);
-						//emojiButtons[i].setFocusPainted(true);
-						//System.out.println("Selected button");
 					}
 					if (password.getLandscape().contains("l" + (i + 1))){
 
@@ -174,9 +172,37 @@ public class PasswordPanel extends javax.swing.JPanel {
 					}
 				}
 			}
+			else{
+				displayTextField.setText("");
+				for(int i = 0; i < 16; i++){
+					emojiButtons[i].setBorderPainted(false);
+					imageButtons[i].setBorderPainted(false);
+				}
+			}
 			
 		}
 		
+		if(model.getPasswordState() == MainModel.PW_STATE.LANDSCAPE){
+			entryTextField.setEnabled(false);
+			for(int i = 0; i < 16; i++){
+				emojiButtons[i].setEnabled(false);
+				imageButtons[i].setEnabled(true);
+			}
+		}
+		else if(model.getPasswordState() == MainModel.PW_STATE.WORDS){
+			entryTextField.setEnabled(true);
+			for(int i = 0; i < 16; i++){
+				emojiButtons[i].setEnabled(false);
+				imageButtons[i].setEnabled(false);
+			}
+		}
+		else{
+			entryTextField.setEnabled(false);
+			for(int i = 0; i < 16; i++){
+				emojiButtons[i].setEnabled(true);
+				imageButtons[i].setEnabled(false);
+			}
+		}
 	}
 
 	
