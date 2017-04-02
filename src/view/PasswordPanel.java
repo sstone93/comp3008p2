@@ -132,7 +132,7 @@ public class PasswordPanel extends javax.swing.JPanel {
 		nextButton = new JButton("Next");
 		nextButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				//controller.something chantal will make me a thing
+				controller.handleNext();
 			}
 		});
 		nextButton.setBounds(780, 330, 75, 30);

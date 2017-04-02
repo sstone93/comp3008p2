@@ -17,6 +17,7 @@ public class MainModel {
 	private int landscapeEntered;
 	private int emojiEntered;
 	private String userID;
+	private boolean canMoveOn;
 	
 	public MainModel() {
 		currentType = TYPE.BANK;
@@ -27,6 +28,7 @@ public class MainModel {
 		landscapeEntered = 0;
 		emojiEntered = 0;
 		userID = "";
+		canMoveOn = false;
 	}
 	
 	public HashMap<TYPE, Password> getAssignedPasswords() {
@@ -43,6 +45,18 @@ public class MainModel {
 	
 	public PW_STATE getPasswordState() {
 		return currentPwState;
+	}
+	
+	public void allowMoveOn() {
+		canMoveOn = true;
+	}
+	
+	public void noMoving() {
+		canMoveOn = false;
+	}
+	
+	public boolean getCanMoveOn() {
+		return canMoveOn;
 	}
 	
 	public int getLandscapeEntered() {
