@@ -178,7 +178,6 @@ public class PasswordPanel extends javax.swing.JPanel {
 	}
 	
 	public void update(){
-		System.out.println("Update");
 		MainModel model = controller.getMainModel();
 		
 		if (model.getCurrentMode() == MainModel.MODE.TRAINING){
@@ -186,8 +185,6 @@ public class PasswordPanel extends javax.swing.JPanel {
 				Password password = model.getAssignedPasswords().get(model.getCurrentType());
 				displayTextField.setText(password.getRandomWord());
 				displayTextField.setVisible(true);
-				System.out.println(password.getEmojis());
-				System.out.println(password.getLandscape());
 				for(int i = 0; i < 16; i++){
 					if (password.getEmojis().contains("e" + (i + 1))){
 						emojiButtons[i].setBorder(new LineBorder(Color.RED));
@@ -234,6 +231,7 @@ public class PasswordPanel extends javax.swing.JPanel {
 		//Only the area the user is currently entering should be visible
 		if(model.getPasswordState() == MainModel.PW_STATE.LANDSCAPE){
 			entryTextField.setEnabled(false);
+			entryTextField.setText("");//reset text here
 			for(int i = 0; i < 16; i++){
 				emojiButtons[i].setEnabled(false);
 				imageButtons[i].setEnabled(true);
