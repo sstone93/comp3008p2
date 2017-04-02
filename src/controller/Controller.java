@@ -86,10 +86,6 @@ public class Controller {
 			mainModel.changeLoginStatus(LOGIN_STATUS.FAILURE);
 			mainModel.addAttempt();
 		}
-		
-		
-//		TODO: uncomment this when view has it
-
 
 //		TODO: create logic for getting the password/mode needed
 //		view.update();
@@ -98,10 +94,10 @@ public class Controller {
 		
 		if (currentMode == MODE.TRAINING) {
 			if (success) {
-//				logEvent("user,ourScheme,login," + event);
+//				logEvent(mainModel.getUserID() + ",ourScheme,login," + event);
 				mainModel.addAttempt();
 				if (mainModel.getAttempts() >= 2) {
-					changeModeTraining(); 
+					mainModel.allowMoveOn(); // the user CAN move on, but they may want to train more.
 				}
 			}
 			
@@ -110,14 +106,27 @@ public class Controller {
 			// log success or failure event
             String userID = mainModel.getUserID();
             logEvent(userID + ",scheme,login," + event);
-			if (!success) {
-				if (mainModel.getAttempts() > 3) {
-					// log failure event
-					logEvent("user,ourScheme,login," + event);	
-					changeModeTesting();
-				}
-			}
+            
+            if (success) {
+ 				logEvent(mainModel.getUserID() + ",ourScheme,login," + event);
+ 				changeModeTesting();
+            	 				
+ 			} else {
+ 				if (mainModel.getAttempts() > 3) {		  				
+ 					if (mainModel.getAttempts() > 3) {				
+ 						// log failure event
+	 					logEvent(mainModel.getUserID() + ",ourScheme,login," + event);	
+	 					changeModeTesting();
+ 					}
+ 				}
+ 			}
 		}
+	}
+	
+	// Handles on click even for next button during training
+	public void handleNext() {
+		changeModeTraining();
+		mainModel.noMoving();
 	}
 	
 	// changes the type for when user is training
@@ -129,24 +138,28 @@ public class Controller {
 		}
 		else if (mainModel.getCurrentType() == TYPE.BANK) {
 			mainModel.changeCurrentType(TYPE.SCHOOL);
-		} else {
+		} 
+		else {
 			mainModel.changeCurrentMode(MODE.TESTING);
 			mainModel.changeCurrentType(randomOrder.get(0));
 		}
 	}
 	
+	
+	// changes the type for when user is testing
+	// if they've reached the last app to train, it changes the mode to finished
 	public void changeModeTesting() {
 		if (randomOrder.size() == 1) { // this was the last type
 			mainModel.changeCurrentMode(MODE.FINISHED);
-			mainModel.resetAttempts();
+		}else {
+			randomOrder.remove(0);
+			mainModel.changeCurrentType(randomOrder.get(0));
 		}
-		randomOrder.remove(0);
-		mainModel.changeCurrentType(randomOrder.get(0));
+		mainModel.resetAttempts();
 	}
 	
 	public void handleTextEnter(String textpw){
 		enteredPassword.setRandomWord(textpw);
-		//TODO: update that password has been entered
 		mainModel.changePasswordState(PW_STATE.EMOJI);
 	}
 	
@@ -158,7 +171,6 @@ public class Controller {
 			mainModel.changePasswordState(PW_STATE.LANDSCAPE);
 			mainModel.resetAttempts();
 		}
-		//TODO: update number of landscapes clicked
 	}
 	
 	//add landscape to the list of landscapes in the users entered password
@@ -166,15 +178,21 @@ public class Controller {
 		enteredPassword.addLandscape(landscapeID);
 		
 		mainModel.addLandscapeEntered(); // updates number of times user has clicked
+		
+		if (mainModel.getLandscapeEntered() == 1) {
+			String userID = mainModel.getUserID();
+	        String event = "start"; // TODO: ask Shannon what need
+	        logEvent(userID + ",scheme,enter," + event);
+		}
+		
 		if (mainModel.getLandscapeEntered() >= 3) {
 			mainModel.changePasswordState(PW_STATE.WORDS);
 			mainModel.resetAttempts();
 		}
-		String userID = mainModel.getUserID();
-        String event = "start"; //ask Shannon what need
-        logEvent(userID + ",scheme,enter," + event);
+		
 	}
 	
+    // grabs the correct password based on what password user is trying to enter
 	public Password getPasswordBasedOnType() {
 		TYPE ct = mainModel.getCurrentType();
 		if (ct == TYPE.FACEBOOK) {
@@ -221,6 +239,7 @@ public class Controller {
 		return mainModel;
 	}
 	
+	// grabs a random word from a text file
 	public String getRandomWord() {
             Scanner x;
             int randNum;
@@ -262,11 +281,13 @@ public class Controller {
             wr.write(String.valueOf(userNum));
             wr.flush();
             wr.close();
+            x.close();
          }
         catch (Exception e){
             System.out.println(e);
         }
-            return userID;
+        
+        return userID;
 	}
 	
 	public static ArrayList<String> getThreeNumbers(String letter) {
