@@ -96,7 +96,6 @@ public class PasswordPanel extends javax.swing.JPanel {
 		emojiButtons = new JButton[16];
 		
 		for (int i = 0; i < 16; i++){
-			//System.out.println(this.getClass().getResource("/resources/words.txt"));
 			
 			try{
 				BufferedImage buttonIcon = ImageIO.read(this.getClass().getResource("/resources/e" + (i+1) + ".png"));
@@ -179,7 +178,13 @@ public class PasswordPanel extends javax.swing.JPanel {
 					imageButtons[i].setBorderPainted(false);
 				}
 			}
-			//TODO:Check if they can move on and show the next button if so
+			
+			if(model.getCanMoveOn()){
+				nextButton.setEnabled(true);
+			}
+			else{
+				nextButton.setEnabled(false);
+			}
 			
 		}
 		else if (model.getCurrentMode() == MainModel.MODE.TESTING){
@@ -203,6 +208,7 @@ public class PasswordPanel extends javax.swing.JPanel {
 				emojiButtons[i].setEnabled(false);
 				imageButtons[i].setEnabled(true);
 			}
+			submitButton.setEnabled(false);
 		}
 		else if(model.getPasswordState() == MainModel.PW_STATE.WORDS){
 			entryTextField.setEnabled(true);
@@ -210,6 +216,7 @@ public class PasswordPanel extends javax.swing.JPanel {
 				emojiButtons[i].setEnabled(false);
 				imageButtons[i].setEnabled(false);
 			}
+			submitButton.setEnabled(false);
 		}
 		else{
 			entryTextField.setEnabled(false);
@@ -217,6 +224,7 @@ public class PasswordPanel extends javax.swing.JPanel {
 				emojiButtons[i].setEnabled(true);
 				imageButtons[i].setEnabled(false);
 			}
+			submitButton.setEnabled(true);
 		}
 	}
 
