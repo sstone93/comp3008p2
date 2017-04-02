@@ -26,6 +26,7 @@ public class PasswordPanel extends javax.swing.JPanel {
 	private JButton nextButton;
 	private JCheckBox showCheckBox;
 	private Controller controller;
+	private JLabel clicksLabel;
 	
 	public PasswordPanel(Controller c){
 		controller = c;
@@ -144,7 +145,14 @@ public class PasswordPanel extends javax.swing.JPanel {
 			}
 		});
 		showCheckBox.setBounds(600, 330, 150, 30);
+		showCheckBox.setSelected(true);
 		add(showCheckBox);
+		
+		clicksLabel = new JLabel("");
+
+		clicksLabel.setFont (clicksLabel.getFont ().deriveFont (24.0f));
+		clicksLabel.setBounds(400, 330, 250, 30);
+		add(clicksLabel);
 	}
 	
 	public void update(){
@@ -208,6 +216,8 @@ public class PasswordPanel extends javax.swing.JPanel {
 				emojiButtons[i].setEnabled(false);
 				imageButtons[i].setEnabled(true);
 			}
+			clicksLabel.setText(model.getLandscapeEntered() + " images clicked");
+			clicksLabel.setVisible(true);
 			submitButton.setEnabled(false);
 		}
 		else if(model.getPasswordState() == MainModel.PW_STATE.WORDS){
@@ -216,6 +226,7 @@ public class PasswordPanel extends javax.swing.JPanel {
 				emojiButtons[i].setEnabled(false);
 				imageButtons[i].setEnabled(false);
 			}
+			clicksLabel.setVisible(false);
 			submitButton.setEnabled(false);
 		}
 		else{
@@ -224,6 +235,8 @@ public class PasswordPanel extends javax.swing.JPanel {
 				emojiButtons[i].setEnabled(true);
 				imageButtons[i].setEnabled(false);
 			}
+			clicksLabel.setText(model.getEmojiEntered() + " emojis clicked");
+			clicksLabel.setVisible(true);
 			submitButton.setEnabled(true);
 		}
 	}
