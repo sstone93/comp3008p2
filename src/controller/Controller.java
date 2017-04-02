@@ -118,16 +118,21 @@ public class Controller {
  			}
 		}
 		// TODO: change the state based off of success
+		MODE oldMode = mainModel.getCurrentMode();
 		mainModel.changeCurrentMode(MODE.PASSWORD_ENTERED);
 		mainModel.changePasswordState(PW_STATE.LANDSCAPE);
 		enteredPassword = new Password();
+		mainModel.resetEmojiAndLandscape();
 		view.update();
+		mainModel.changeCurrentMode(oldMode);
+		mainModel.changeLoginStatus(LOGIN_STATUS.FAILURE);
 	}
 	
 	// Handles on click even for next button during training
 	public void handleNext() {
 		changeModeTraining();
 		mainModel.noMoving();
+		mainModel.resetEmojiAndLandscape();
 		enteredPassword = new Password();
 		mainModel.changePasswordState(PW_STATE.LANDSCAPE);
 	}
