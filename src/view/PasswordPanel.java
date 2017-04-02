@@ -10,10 +10,11 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
 import controller.Controller;
-import model.MainModel;
+import model.*;
 
 @SuppressWarnings("serial")
 public class PasswordPanel extends javax.swing.JPanel {
@@ -151,6 +152,30 @@ public class PasswordPanel extends javax.swing.JPanel {
 	public void update(){
 		System.out.println("Update");
 		MainModel model = controller.getMainModel();
+		
+		if (model.getCurrentMode() == MainModel.MODE.TRAINING){
+			if(showCheckBox.isSelected()){
+				Password password = model.getAssignedPasswords().get(model.getCurrentType());
+				displayTextField.setText(password.getRandomWord());
+				System.out.println(password.getEmojis());
+				System.out.println(password.getLandscape());
+				for(int i = 0; i < 16; i++){
+					if (password.getEmojis().contains("e" + (i + 1))){
+						//emojiButtons[i].setSelected(true);
+						emojiButtons[i].setBorder(new LineBorder(Color.RED));
+						emojiButtons[i].setBorderPainted(true);
+						//emojiButtons[i].setFocusPainted(true);
+						//System.out.println("Selected button");
+					}
+					if (password.getLandscape().contains("l" + (i + 1))){
+
+						imageButtons[i].setBorder(new LineBorder(Color.RED));
+						imageButtons[i].setBorderPainted(true);
+					}
+				}
+			}
+			
+		}
 		
 	}
 
