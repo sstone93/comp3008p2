@@ -250,7 +250,7 @@ public class Controller {
             try{
                 x = new Scanner(new File("./src/resources/user.txt"));
                 y = x.nextLine();
-                userID = "user" + x;
+                userID = "user" + y;
                 userNum = Integer.parseInt(y);
                 		
 		if (currentMode != MODE.PASSWORD_ENTERED) {
