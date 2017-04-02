@@ -33,6 +33,7 @@ public class Controller {
 	public Controller() {
 		
 		mainModel = new MainModel();
+		mainModel.setUserID(getFileUserID());
 		
 		for (int i = 0; i < 3; i++) {
 			String randomWord = getRandomWord();
@@ -107,7 +108,7 @@ public class Controller {
 		} else if (currentMode == MODE.TESTING) {
 
 			// log success or failure event
-            String userID = getUserID();
+            String userID = mainModel.getUserID();
             logEvent(userID + ",scheme,login," + event);
 			if (!success) {
 				if (mainModel.getAttempts() > 3) {
@@ -169,7 +170,7 @@ public class Controller {
 			mainModel.changePasswordState(PW_STATE.WORDS);
 			mainModel.resetAttempts();
 		}
-		String userID = getUserID();
+		String userID = mainModel.getUserID();
         String event = "start"; //ask Shannon what need
         logEvent(userID + ",scheme,enter," + event);
 	}
@@ -241,30 +242,30 @@ public class Controller {
             return randWord;
 	}
 	
-	public String getUserID() {
-            Scanner x;
-            int userNum;
-            String userID = "";
-            String y;
-            MODE currentMode = mainModel.getCurrentMode();
-            try{
-                x = new Scanner(new File("./src/resources/user.txt"));
-                y = x.nextLine();
-                userID = "user" + y;
-                userNum = Integer.parseInt(y);
+	public String getFileUserID() {
+        Scanner x;
+        int userNum;
+        String userID = "";
+        String y;
+        MODE currentMode = mainModel.getCurrentMode();
+        try{
+            x = new Scanner(new File("./src/resources/user.txt"));
+            y = x.nextLine();
+            userID = "user" + y;
+            userNum = Integer.parseInt(y);
                 		
-		if (currentMode != MODE.PASSWORD_ENTERED) {
-                   userNum++;
-                }
+			if (currentMode != MODE.PASSWORD_ENTERED) {
+	           userNum++;
+	        }
                 
-                Writer wr = new FileWriter("./src/resources/user.txt");
-                wr.write(String.valueOf(userNum));
-                wr.flush();
-                wr.close();
-             }
-            catch (Exception e){
-                System.out.println("Could not find file");
-            }
+            Writer wr = new FileWriter("./src/resources/user.txt");
+            wr.write(String.valueOf(userNum));
+            wr.flush();
+            wr.close();
+         }
+        catch (Exception e){
+            System.out.println(e);
+        }
             return userID;
 	}
 	

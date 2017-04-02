@@ -16,6 +16,7 @@ public class MainModel {
 	private int attempts;
 	private int landscapeEntered;
 	private int emojiEntered;
+	private String userID;
 	
 	public MainModel() {
 		currentType = TYPE.BANK;
@@ -25,6 +26,7 @@ public class MainModel {
 		attempts = 0;
 		landscapeEntered = 0;
 		emojiEntered = 0;
+		userID = "";
 	}
 	
 	public HashMap<TYPE, Password> getAssignedPasswords() {
@@ -49,6 +51,14 @@ public class MainModel {
 	
 	public void addLandscapeEntered() {
 		landscapeEntered++;
+	}
+	
+	public String getUserID() {
+		return userID;
+	}
+	
+	public void setUserID(String u) {
+		userID = u;
 	}
 	
 	public int getEmojiEntered() {
