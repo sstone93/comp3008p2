@@ -23,6 +23,8 @@ public class PasswordPanel extends javax.swing.JPanel {
 	private JButton[] imageButtons;
 	private JButton[] emojiButtons;
 	private JButton submitButton;
+	private JButton nextButton;
+	private JCheckBox showCheckBox;
 	private Controller controller;
 	
 	public PasswordPanel(Controller c){
@@ -126,9 +128,28 @@ public class PasswordPanel extends javax.swing.JPanel {
 		
 		submitButton.setBounds(880, 330, 75, 30);
 		add(submitButton);
+		
+		nextButton = new JButton("Next");
+		nextButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				//controller.something chantal will make me a thing
+			}
+		});
+		nextButton.setBounds(780, 330, 75, 30);
+		add(nextButton);
+		
+		showCheckBox = new JCheckBox("Show password");
+		showCheckBox.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				update();
+			}
+		});
+		showCheckBox.setBounds(600, 330, 150, 30);
+		add(showCheckBox);
 	}
 	
 	public void update(){
+		System.out.println("Update");
 		MainModel model = controller.getMainModel();
 		
 	}
