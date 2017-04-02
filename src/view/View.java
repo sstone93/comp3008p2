@@ -37,5 +37,9 @@ public class View extends JFrame {
 		contentPane.add(label);
 		
 	}
+	
+	public void update(){
+		passwordPanel.update();
+	}
 
 }
