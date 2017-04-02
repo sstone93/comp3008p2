@@ -3,6 +3,7 @@ package view;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -29,6 +30,11 @@ public class View extends JFrame {
 		passwordPanel = new PasswordPanel(controller);
 		contentPane.add(passwordPanel);
 		
+		JLabel label = new JLabel("Enter password for: " + c.getMainModel().getCurrentType());
+		label.setFont (label.getFont ().deriveFont (24.0f));
+		label.setBounds(330, 10, 500, 30);
+		add(label);
+		contentPane.add(label);
 		
 	}
 
