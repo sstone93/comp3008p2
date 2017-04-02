@@ -78,6 +78,7 @@ public class Controller {
 		
 		// TODO: change the state based off of success
 		mainModel.changeCurrentMode(MODE.PASSWORD_ENTERED);
+		mainModel.changePasswordState(PW_STATE.LANDSCAPE);
 		
 		String event = success ? "success" : "failure";
 		if (success) {
@@ -121,12 +122,14 @@ public class Controller {
  				}
  			}
 		}
+		view.update();
 	}
 	
 	// Handles on click even for next button during training
 	public void handleNext() {
 		changeModeTraining();
 		mainModel.noMoving();
+		mainModel.changePasswordState(PW_STATE.LANDSCAPE);
 	}
 	
 	// changes the type for when user is training
@@ -161,6 +164,7 @@ public class Controller {
 	public void handleTextEnter(String textpw){
 		enteredPassword.setRandomWord(textpw);
 		mainModel.changePasswordState(PW_STATE.EMOJI);
+		view.update();
 	}
 	
 	//adds emoji to list of emojis in the users enteredPassword
@@ -168,9 +172,9 @@ public class Controller {
 		enteredPassword.addEmoji(emojiID);
 		mainModel.addEmojiEntered();
 		if (mainModel.getEmojiEntered() >= 3) {
-			mainModel.changePasswordState(PW_STATE.LANDSCAPE);
 			mainModel.resetAttempts();
 		}
+		view.update();
 	}
 	
 	//add landscape to the list of landscapes in the users entered password
@@ -189,7 +193,7 @@ public class Controller {
 			mainModel.changePasswordState(PW_STATE.WORDS);
 			mainModel.resetAttempts();
 		}
-		
+        view.update();
 	}
 	
     // grabs the correct password based on what password user is trying to enter

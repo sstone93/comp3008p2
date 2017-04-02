@@ -15,6 +15,7 @@ public class View extends JFrame {
 	private PasswordPanel passwordPanel;
 	private Controller controller;
 	private JPanel contentPane;
+	private JLabel instituteLabel;
 	
 	public View(Controller c){
 		this.controller = c;
@@ -30,15 +31,16 @@ public class View extends JFrame {
 		passwordPanel = new PasswordPanel(controller);
 		contentPane.add(passwordPanel);
 		
-		JLabel label = new JLabel("Enter password for: " + c.getMainModel().getCurrentType());
-		label.setFont (label.getFont ().deriveFont (24.0f));
-		label.setBounds(330, 10, 500, 30);
-		add(label);
-		contentPane.add(label);
+		instituteLabel = new JLabel("");
+		instituteLabel.setFont (instituteLabel.getFont ().deriveFont (24.0f));
+		instituteLabel.setBounds(330, 10, 500, 30);
+		contentPane.add(instituteLabel);
 		
+		update();
 	}
 	
 	public void update(){
+		instituteLabel.setText("Enter password for: " + controller.getMainModel().getCurrentType());
 		passwordPanel.update();
 	}
 
