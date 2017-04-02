@@ -129,6 +129,7 @@ public class Controller {
 	public void handleNext() {
 		changeModeTraining();
 		mainModel.noMoving();
+		mainModel.changePasswordState(PW_STATE.LANDSCAPE);
 	}
 	
 	// changes the type for when user is training
