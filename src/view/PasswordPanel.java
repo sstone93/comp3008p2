@@ -11,6 +11,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import controller.Controller;
 import model.*;
@@ -44,7 +46,7 @@ public class PasswordPanel extends javax.swing.JPanel {
 		entryTextField = new JPasswordField("");
 		entryTextField.setBounds(400, 150, 180, 30);
 		entryTextField.setFont(entryTextField.getFont().deriveFont(24.0f));
-		entryTextField.addFocusListener(new FocusListener(){
+		/*entryTextField.addFocusListener(new FocusListener(){
 			public void focusLost(FocusEvent e){
 				String t = new String(entryTextField.getPassword());
 				controller.handleTextEnter(t);
@@ -53,6 +55,26 @@ public class PasswordPanel extends javax.swing.JPanel {
 			public void focusGained(FocusEvent e){
 				//do nothing, we don't care about this.
 				// TODO: log start time in controller
+			}
+		});*/
+		entryTextField.getDocument().addDocumentListener(new DocumentListener(){
+			public void changedUpdate(DocumentEvent e){
+				callController();
+			}
+
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				callController();
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				callController();
+			}
+			
+			public void callController(){
+				String t = new String(entryTextField.getPassword());
+				controller.handleTextEnter(t);
 			}
 		});
 		add(entryTextField);

@@ -163,9 +163,14 @@ public class Controller {
 	}
 	
 	public void handleTextEnter(String textpw){
-		enteredPassword.setRandomWord(textpw);
-		mainModel.changePasswordState(PW_STATE.EMOJI);
-		view.update();
+		if (textpw.length() == 6){
+			enteredPassword.setRandomWord(textpw);
+			mainModel.changePasswordState(PW_STATE.EMOJI);
+			view.update();
+		}
+		else{
+			System.out.println("HandleTextEnter called, string not long enough.");
+		}
 	}
 	
 	//adds emoji to list of emojis in the users enteredPassword
