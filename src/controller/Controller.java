@@ -118,6 +118,7 @@ public class Controller {
  			}
 		}
 		// TODO: change the state based off of success
+//		System.out.println("NEXT:::??? "+ mainModel.getCanMoveOn());
 		MODE oldMode = mainModel.getCurrentMode();
 		mainModel.changeCurrentMode(MODE.PASSWORD_ENTERED);
 		mainModel.changePasswordState(PW_STATE.LANDSCAPE);
@@ -181,9 +182,9 @@ public class Controller {
 	public void handleEmojiClicked(String emojiID){
 		enteredPassword.addEmoji(emojiID);
 		mainModel.addEmojiEntered();
-		if (mainModel.getEmojiEntered() >= 3) {
-			mainModel.resetAttempts();
-		}
+//		if (mainModel.getEmojiEntered() >= 3) {
+//			mainModel.resetAttempts();
+//		}
 		view.update();
 	}
 	
@@ -201,7 +202,7 @@ public class Controller {
 		
 		if (mainModel.getLandscapeEntered() >= 3) {
 			mainModel.changePasswordState(PW_STATE.WORDS);
-			mainModel.resetAttempts();
+//			mainModel.resetAttempts();
 		}
         view.update();
 	}
