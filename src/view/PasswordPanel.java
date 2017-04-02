@@ -101,7 +101,7 @@ public class PasswordPanel extends javax.swing.JPanel {
 				System.out.println("IT DIDN'T WORK");
 			}
 			
-			final String id = "i" + (i + 1);
+			final String id = "l" + (i + 1);
 			
 			imageButtons[i].setName(id);
 			imageButtons[i].setBounds(xStart + (i%gridSize) * buttonSize, yStart + (i/gridSize) * buttonSize, buttonSize, buttonSize);

@@ -74,13 +74,10 @@ public class Controller {
 	
 	public void handleSubmit(){
 		Password assignedPassword = getPasswordBasedOnType();
-		boolean success = assignedPassword == enteredPassword;
-		
-		// TODO: change the state based off of success
-		mainModel.changeCurrentMode(MODE.PASSWORD_ENTERED);
-		mainModel.changePasswordState(PW_STATE.LANDSCAPE);
+		boolean success = assignedPassword.equals(enteredPassword);
 		
 		String event = success ? "success" : "failure";
+		
 		if (success) {
 			mainModel.changeLoginStatus(LOGIN_STATUS.SUCCESS);
 		} else {
@@ -89,9 +86,6 @@ public class Controller {
 		}
 		view.update();
 
-//		TODO: create logic for getting the password/mode needed
-//		view.update();
-		
 		MODE currentMode = mainModel.getCurrentMode();
 		
 		if (currentMode == MODE.TRAINING) {
@@ -123,6 +117,10 @@ public class Controller {
  				}
  			}
 		}
+		// TODO: change the state based off of success
+		mainModel.changeCurrentMode(MODE.PASSWORD_ENTERED);
+		mainModel.changePasswordState(PW_STATE.LANDSCAPE);
+		enteredPassword = new Password();
 		view.update();
 	}
 	
@@ -130,6 +128,7 @@ public class Controller {
 	public void handleNext() {
 		changeModeTraining();
 		mainModel.noMoving();
+		enteredPassword = new Password();
 		mainModel.changePasswordState(PW_STATE.LANDSCAPE);
 	}
 	
