@@ -87,6 +87,7 @@ public class Controller {
 			mainModel.changeLoginStatus(LOGIN_STATUS.FAILURE);
 			mainModel.addAttempt();
 		}
+		view.update();
 
 //		TODO: create logic for getting the password/mode needed
 //		view.update();

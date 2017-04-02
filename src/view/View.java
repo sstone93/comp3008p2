@@ -4,10 +4,12 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controller.Controller;
+import model.*;
 
 @SuppressWarnings("serial")
 public class View extends JFrame {
@@ -40,7 +42,28 @@ public class View extends JFrame {
 	}
 	
 	public void update(){
-		instituteLabel.setText("Enter password for: " + controller.getMainModel().getCurrentType());
+		MainModel model = controller.getMainModel();
+		
+		if(model.getCurrentMode() == MainModel.MODE.PASSWORD_ENTERED){
+			if(model.getCurrentStatus() == MainModel.LOGIN_STATUS.SUCCESS){
+				JOptionPane.showMessageDialog(this, "Correct password entered.", "Correct", JOptionPane.PLAIN_MESSAGE);
+			}
+			else {
+				JOptionPane.showMessageDialog(this, "Incorrect password entered.", "Incorrct", JOptionPane.PLAIN_MESSAGE);	
+			}
+		}
+		else if (model.getCurrentMode() == MainModel.MODE.FINISHED){
+			JOptionPane.showMessageDialog(this, "You have reached the end. Thank you for participating", "Thanks!", JOptionPane.PLAIN_MESSAGE);
+			this.dispose();
+		}
+		else if (model.getCurrentMode() == MainModel.MODE.TRAINING){
+			instituteLabel.setText("Practice entering password for: " + model.getCurrentType());
+		}
+		else{
+			instituteLabel.setText("Enter password for: " + model.getCurrentType());
+
+		}
+		
 		passwordPanel.update();
 	}
 
