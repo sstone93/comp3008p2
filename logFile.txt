@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2017-04-01T20:39:09</date>
+  <millis>1491093549657</millis>
+  <sequence>0</sequence>
+  <logger>MyLog</logger>
+  <level>INFO</level>
+  <class>controller.Controller</class>
+  <method>logEvent</method>
+  <thread>16</thread>
+  <message>01/04/2017 20:39:09,userjava.util.Scanner[delimiters=\p{javaWhitespace}+][position=2][match valid=true][need input=false][source closed=true][skipped=false][group separator=\,][decimal separator=\.][positive prefix=][negative prefix=\Q-\E][positive suffix=][negative suffix=][NaN string=\Q?\E][infinity string=\Q?\E],scheme,enter,start</message>
+</record>
