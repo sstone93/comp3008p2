@@ -15,6 +15,8 @@ import java.util.Date;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.*;
 import java.util.Scanner;
+import java.io.Writer;
+import java.io.FileWriter;
 import java.util.Set; 
 
 public class Controller {
@@ -82,9 +84,7 @@ public class Controller {
 			mainModel.changeLoginStatus(LOGIN_STATUS.FAILURE);
 			mainModel.addAttempt();
 		}
-		// log success or failure event
-		logEvent("user,scheme,login," + event);	
-		
+
 //		TODO: create logic for getting the password/mode needed
 //		view.update();
 		
@@ -93,6 +93,9 @@ public class Controller {
 		if (currentMode == MODE.TRAINING) {
 			
 		} else if (currentMode == MODE.TESTING) {
+			// log success or failure event
+            String userID = getUserID();
+            logEvent(userID + ",scheme,login," + event)
 			if (!success) {
 				if (mainModel.getAttempts() > 3) {
 //					TODO: logic here
@@ -117,6 +120,9 @@ public class Controller {
 	//add landscape to the list of landscapes in the users entered password
 	public void handleLandscapeClicked(String landscapeID){
 		enteredPassword.addLandscape(landscapeID);
+		String userID = getUserID();
+        String event = "start"; //ask Shannon what need
+        logEvent(userID + ",scheme,enter," + event);
 		//TODO: update number of landscapes clicked
 	}
 	
@@ -185,6 +191,33 @@ public class Controller {
                 System.out.println("Could not find file");
             }
             return randWord;
+	}
+	
+	public String getUserID() {
+            Scanner x;
+            int userNum;
+            String userID = "";
+            String y;
+            MODE currentMode = mainModel.getCurrentMode();
+            try{
+                x = new Scanner(new File("./src/resources/user.txt"));
+                y = x.nextLine();
+                userID = "user" + x;
+                userNum = Integer.parseInt(y);
+                		
+		if (currentMode != MODE.PASSWORD_ENTERED) {
+                   userNum++;
+                }
+                
+                Writer wr = new FileWriter("./src/resources/user.txt");
+                wr.write(String.valueOf(userNum));
+                wr.flush();
+                wr.close();
+             }
+            catch (Exception e){
+                System.out.println("Could not find file");
+            }
+            return userID;
 	}
 	
 	public static ArrayList<String> getThreeNumbers(String letter) {
