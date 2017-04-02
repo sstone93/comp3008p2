@@ -13,6 +13,7 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 
 import controller.Controller;
+import model.MainModel;
 
 @SuppressWarnings("serial")
 public class PasswordPanel extends javax.swing.JPanel {
@@ -125,6 +126,11 @@ public class PasswordPanel extends javax.swing.JPanel {
 		
 		submitButton.setBounds(880, 330, 75, 30);
 		add(submitButton);
+	}
+	
+	public void update(){
+		MainModel model = controller.getMainModel();
+		
 	}
 
 	
