@@ -190,10 +190,16 @@ public class PasswordPanel extends javax.swing.JPanel {
 						emojiButtons[i].setBorder(new LineBorder(Color.RED));
 						emojiButtons[i].setBorderPainted(true);
 					}
+					else {
+						emojiButtons[i].setBorder(null);
+					}
 					if (password.getLandscape().contains("l" + (i + 1))){
 
 						imageButtons[i].setBorder(new LineBorder(Color.RED));
 						imageButtons[i].setBorderPainted(true);
+					}
+					else{
+						imageButtons[i].setBorder(null);
 					}
 				}
 			}
