@@ -24,16 +24,15 @@ public class Password {
 	
 	// method to compare that two passwords are equal
 	public boolean equals(Password pw) {
-		
 		if (pw == null){ return false; }
 		
-		if (pw.randomWord != this.randomWord) {
+		if (! pw.randomWord.contentEquals( this.randomWord)) {
 			return false;
 		}
 		
 		Collections.sort(pw.landscape);
 		Collections.sort(this.landscape);
-		if (pw.landscape != this.landscape) {
+		if (! pw.landscape.equals( this.landscape)) {
 			return false;
 		}
 		

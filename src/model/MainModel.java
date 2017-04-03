@@ -20,7 +20,7 @@ public class MainModel {
 	private boolean canMoveOn;
 	
 	public MainModel() {
-		currentType = TYPE.BANK;
+		currentType = TYPE.FACEBOOK;
 		currentMode = MODE.TRAINING;
 		currentStatus = LOGIN_STATUS.FAILURE;
 		currentPwState = PW_STATE.LANDSCAPE;

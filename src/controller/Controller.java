@@ -74,23 +74,21 @@ public class Controller {
 	
 	public void handleSubmit(){
 		Password assignedPassword = getPasswordBasedOnType();
-		boolean success = assignedPassword == enteredPassword;
-		
-		// TODO: change the state based off of success
-		mainModel.changeCurrentMode(MODE.PASSWORD_ENTERED);
-		mainModel.changePasswordState(PW_STATE.LANDSCAPE);
+		boolean success = assignedPassword.equals(enteredPassword);
 		
 		String event = success ? "success" : "failure";
+		MODE oldMode = mainModel.getCurrentMode();
+		mainModel.changeCurrentMode(MODE.PASSWORD_ENTERED);
+		
 		if (success) {
 			mainModel.changeLoginStatus(LOGIN_STATUS.SUCCESS);
 		} else {
 			mainModel.changeLoginStatus(LOGIN_STATUS.FAILURE);
 			mainModel.addAttempt();
 		}
+		view.update();
 
-//		TODO: create logic for getting the password/mode needed
-//		view.update();
-		
+		mainModel.changeCurrentMode(oldMode);
 		MODE currentMode = mainModel.getCurrentMode();
 		
 		if (currentMode == MODE.TRAINING) {
@@ -113,23 +111,37 @@ public class Controller {
  				changeModeTesting();
             	 				
  			} else {
- 				if (mainModel.getAttempts() > 3) {		  				
- 					if (mainModel.getAttempts() > 3) {				
+ 				if (mainModel.getAttempts() >= 3) {		  				
+ 					if (mainModel.getAttempts() >= 3) {				
  						// log failure event
-	 					logEvent(mainModel.getUserID() + ",ourScheme,login," + event);	
+	 					logEvent(mainModel.getUserID() + ",ourScheme,login," + event);
+	 					
 	 					changeModeTesting();
+	 					oldMode = mainModel.getCurrentMode();
  					}
  				}
  			}
 		}
+		// TODO: change the state based off of success
+		System.out.println("NEXT:::??? "+ mainModel.getCanMoveOn());
+		
+		mainModel.changePasswordState(PW_STATE.LANDSCAPE);
+		enteredPassword = new Password();
+		mainModel.resetEmojiAndLandscape();
 		view.update();
+		mainModel.changeCurrentMode(oldMode);
+		mainModel.changeLoginStatus(LOGIN_STATUS.FAILURE);
 	}
 	
 	// Handles on click even for next button during training
 	public void handleNext() {
 		changeModeTraining();
 		mainModel.noMoving();
+		mainModel.resetEmojiAndLandscape();
+		mainModel.resetAttempts();
+		enteredPassword = new Password();
 		mainModel.changePasswordState(PW_STATE.LANDSCAPE);
+		view.update();
 	}
 	
 	// changes the type for when user is training
@@ -162,18 +174,23 @@ public class Controller {
 	}
 	
 	public void handleTextEnter(String textpw){
-		enteredPassword.setRandomWord(textpw);
-		mainModel.changePasswordState(PW_STATE.EMOJI);
-		view.update();
+		if (textpw.length() == 6){
+			enteredPassword.setRandomWord(textpw);
+			mainModel.changePasswordState(PW_STATE.EMOJI);
+			view.update();
+		}
+		else{
+			System.out.println("HandleTextEnter called, string not long enough.");
+		}
 	}
 	
 	//adds emoji to list of emojis in the users enteredPassword
 	public void handleEmojiClicked(String emojiID){
 		enteredPassword.addEmoji(emojiID);
 		mainModel.addEmojiEntered();
-		if (mainModel.getEmojiEntered() >= 3) {
-			mainModel.resetAttempts();
-		}
+//		if (mainModel.getEmojiEntered() >= 3) {
+//			mainModel.resetAttempts();
+//		}
 		view.update();
 	}
 	
@@ -191,7 +208,7 @@ public class Controller {
 		
 		if (mainModel.getLandscapeEntered() >= 3) {
 			mainModel.changePasswordState(PW_STATE.WORDS);
-			mainModel.resetAttempts();
+//			mainModel.resetAttempts();
 		}
         view.update();
 	}

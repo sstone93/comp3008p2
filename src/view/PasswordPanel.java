@@ -11,6 +11,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import controller.Controller;
 import model.*;
@@ -26,6 +28,7 @@ public class PasswordPanel extends javax.swing.JPanel {
 	private JButton nextButton;
 	private JCheckBox showCheckBox;
 	private Controller controller;
+	private JLabel clicksLabel;
 	
 	public PasswordPanel(Controller c){
 		controller = c;
@@ -43,7 +46,7 @@ public class PasswordPanel extends javax.swing.JPanel {
 		entryTextField = new JPasswordField("");
 		entryTextField.setBounds(400, 150, 180, 30);
 		entryTextField.setFont(entryTextField.getFont().deriveFont(24.0f));
-		entryTextField.addFocusListener(new FocusListener(){
+		/*entryTextField.addFocusListener(new FocusListener(){
 			public void focusLost(FocusEvent e){
 				String t = new String(entryTextField.getPassword());
 				controller.handleTextEnter(t);
@@ -52,6 +55,26 @@ public class PasswordPanel extends javax.swing.JPanel {
 			public void focusGained(FocusEvent e){
 				//do nothing, we don't care about this.
 				// TODO: log start time in controller
+			}
+		});*/
+		entryTextField.getDocument().addDocumentListener(new DocumentListener(){
+			public void changedUpdate(DocumentEvent e){
+				callController();
+			}
+
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				callController();
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				callController();
+			}
+			
+			public void callController(){
+				String t = new String(entryTextField.getPassword());
+				controller.handleTextEnter(t);
 			}
 		});
 		add(entryTextField);
@@ -78,7 +101,7 @@ public class PasswordPanel extends javax.swing.JPanel {
 				System.out.println("IT DIDN'T WORK");
 			}
 			
-			final String id = "i" + (i + 1);
+			final String id = "l" + (i + 1);
 			
 			imageButtons[i].setName(id);
 			imageButtons[i].setBounds(xStart + (i%gridSize) * buttonSize, yStart + (i/gridSize) * buttonSize, buttonSize, buttonSize);
@@ -96,7 +119,6 @@ public class PasswordPanel extends javax.swing.JPanel {
 		emojiButtons = new JButton[16];
 		
 		for (int i = 0; i < 16; i++){
-			//System.out.println(this.getClass().getResource("/resources/words.txt"));
 			
 			try{
 				BufferedImage buttonIcon = ImageIO.read(this.getClass().getResource("/resources/e" + (i+1) + ".png"));
@@ -145,11 +167,17 @@ public class PasswordPanel extends javax.swing.JPanel {
 			}
 		});
 		showCheckBox.setBounds(600, 330, 150, 30);
+		showCheckBox.setSelected(true);
 		add(showCheckBox);
+		
+		clicksLabel = new JLabel("");
+
+		clicksLabel.setFont (clicksLabel.getFont ().deriveFont (24.0f));
+		clicksLabel.setBounds(400, 330, 250, 30);
+		add(clicksLabel);
 	}
 	
 	public void update(){
-		System.out.println("Update");
 		MainModel model = controller.getMainModel();
 		
 		if (model.getCurrentMode() == MainModel.MODE.TRAINING){
@@ -157,17 +185,21 @@ public class PasswordPanel extends javax.swing.JPanel {
 				Password password = model.getAssignedPasswords().get(model.getCurrentType());
 				displayTextField.setText(password.getRandomWord());
 				displayTextField.setVisible(true);
-				System.out.println(password.getEmojis());
-				System.out.println(password.getLandscape());
 				for(int i = 0; i < 16; i++){
 					if (password.getEmojis().contains("e" + (i + 1))){
 						emojiButtons[i].setBorder(new LineBorder(Color.RED));
 						emojiButtons[i].setBorderPainted(true);
 					}
+					else {
+						emojiButtons[i].setBorder(null);
+					}
 					if (password.getLandscape().contains("l" + (i + 1))){
 
 						imageButtons[i].setBorder(new LineBorder(Color.RED));
 						imageButtons[i].setBorderPainted(true);
+					}
+					else{
+						imageButtons[i].setBorder(null);
 					}
 				}
 			}
@@ -179,7 +211,13 @@ public class PasswordPanel extends javax.swing.JPanel {
 					imageButtons[i].setBorderPainted(false);
 				}
 			}
-			//TODO:Check if they can move on and show the next button if so
+			
+			if(model.getCanMoveOn()){
+				nextButton.setEnabled(true);
+			}
+			else{
+				nextButton.setEnabled(false);
+			}
 			
 		}
 		else if (model.getCurrentMode() == MainModel.MODE.TESTING){
@@ -199,10 +237,14 @@ public class PasswordPanel extends javax.swing.JPanel {
 		//Only the area the user is currently entering should be visible
 		if(model.getPasswordState() == MainModel.PW_STATE.LANDSCAPE){
 			entryTextField.setEnabled(false);
+			entryTextField.setText("");//reset text here
 			for(int i = 0; i < 16; i++){
 				emojiButtons[i].setEnabled(false);
 				imageButtons[i].setEnabled(true);
 			}
+			clicksLabel.setText(model.getLandscapeEntered() + " images clicked");
+			clicksLabel.setVisible(true);
+			submitButton.setEnabled(false);
 		}
 		else if(model.getPasswordState() == MainModel.PW_STATE.WORDS){
 			entryTextField.setEnabled(true);
@@ -210,6 +252,8 @@ public class PasswordPanel extends javax.swing.JPanel {
 				emojiButtons[i].setEnabled(false);
 				imageButtons[i].setEnabled(false);
 			}
+			clicksLabel.setVisible(false);
+			submitButton.setEnabled(false);
 		}
 		else{
 			entryTextField.setEnabled(false);
@@ -217,6 +261,9 @@ public class PasswordPanel extends javax.swing.JPanel {
 				emojiButtons[i].setEnabled(true);
 				imageButtons[i].setEnabled(false);
 			}
+			clicksLabel.setText(model.getEmojiEntered() + " emojis clicked");
+			clicksLabel.setVisible(true);
+			submitButton.setEnabled(true);
 		}
 	}
 
