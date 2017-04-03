@@ -111,11 +111,13 @@ public class Controller {
  				changeModeTesting();
             	 				
  			} else {
- 				if (mainModel.getAttempts() > 3) {		  				
- 					if (mainModel.getAttempts() > 3) {				
+ 				if (mainModel.getAttempts() >= 3) {		  				
+ 					if (mainModel.getAttempts() >= 3) {				
  						// log failure event
-	 					logEvent(mainModel.getUserID() + ",ourScheme,login," + event);	
+	 					logEvent(mainModel.getUserID() + ",ourScheme,login," + event);
+	 					
 	 					changeModeTesting();
+	 					oldMode = mainModel.getCurrentMode();
  					}
  				}
  			}
