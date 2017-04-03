@@ -77,6 +77,8 @@ public class Controller {
 		boolean success = assignedPassword.equals(enteredPassword);
 		
 		String event = success ? "success" : "failure";
+		MODE oldMode = mainModel.getCurrentMode();
+		mainModel.changeCurrentMode(MODE.PASSWORD_ENTERED);
 		
 		if (success) {
 			mainModel.changeLoginStatus(LOGIN_STATUS.SUCCESS);
@@ -86,6 +88,7 @@ public class Controller {
 		}
 		view.update();
 
+		mainModel.changeCurrentMode(oldMode);
 		MODE currentMode = mainModel.getCurrentMode();
 		
 		if (currentMode == MODE.TRAINING) {
@@ -118,9 +121,8 @@ public class Controller {
  			}
 		}
 		// TODO: change the state based off of success
-//		System.out.println("NEXT:::??? "+ mainModel.getCanMoveOn());
-		MODE oldMode = mainModel.getCurrentMode();
-		mainModel.changeCurrentMode(MODE.PASSWORD_ENTERED);
+		System.out.println("NEXT:::??? "+ mainModel.getCanMoveOn());
+		
 		mainModel.changePasswordState(PW_STATE.LANDSCAPE);
 		enteredPassword = new Password();
 		mainModel.resetEmojiAndLandscape();
@@ -134,6 +136,7 @@ public class Controller {
 		changeModeTraining();
 		mainModel.noMoving();
 		mainModel.resetEmojiAndLandscape();
+		mainModel.resetAttempts();
 		enteredPassword = new Password();
 		mainModel.changePasswordState(PW_STATE.LANDSCAPE);
 	}
