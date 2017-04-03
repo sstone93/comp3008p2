@@ -104,17 +104,16 @@ public class Controller {
 
 			// log success or failure event
             String userID = mainModel.getUserID();
-            logEvent(userID + ",scheme,login," + event);
             
             if (success) {
- 				logEvent(mainModel.getUserID() + ",ourScheme,login," + event);
+ 				logEvent(userID + ",ourScheme,login," + event);
  				changeModeTesting();
             	 				
  			} else {
  				if (mainModel.getAttempts() >= 3) {		  				
  					if (mainModel.getAttempts() >= 3) {				
  						// log failure event
-	 					logEvent(mainModel.getUserID() + ",ourScheme,login," + event);
+	 					logEvent(userID + ",ourScheme,login," + event);
 	 					
 	 					changeModeTesting();
 	 					oldMode = mainModel.getCurrentMode();
