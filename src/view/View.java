@@ -35,7 +35,7 @@ public class View extends JFrame {
 		
 		instituteLabel = new JLabel("");
 		instituteLabel.setFont (instituteLabel.getFont ().deriveFont (24.0f));
-		instituteLabel.setBounds(330, 10, 500, 30);
+		instituteLabel.setBounds(330, 10, 700, 30);
 		contentPane.add(instituteLabel);
 		
 		update();
