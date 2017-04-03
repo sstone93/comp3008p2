@@ -139,6 +139,7 @@ public class Controller {
 		mainModel.resetAttempts();
 		enteredPassword = new Password();
 		mainModel.changePasswordState(PW_STATE.LANDSCAPE);
+		view.update();
 	}
 	
 	// changes the type for when user is training
