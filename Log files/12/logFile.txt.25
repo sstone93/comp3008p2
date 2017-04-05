@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2017-04-03T13:40:39</date>
+  <millis>1491241239921</millis>
+  <sequence>25</sequence>
+  <logger>MyLog</logger>
+  <level>INFO</level>
+  <class>controller.Controller</class>
+  <method>logEvent</method>
+  <thread>15</thread>
+  <message>03/04/2017 13:40:39,user12,ourScheme,login,success</message>
+</record>
+</log>

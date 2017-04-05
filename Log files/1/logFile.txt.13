@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2017-04-03T11:45:59</date>
+  <millis>1491234359383</millis>
+  <sequence>13</sequence>
+  <logger>MyLog</logger>
+  <level>INFO</level>
+  <class>controller.Controller</class>
+  <method>logEvent</method>
+  <thread>15</thread>
+  <message>03/04/2017 11:45:59,user1,scheme,enter,start</message>
+</record>
+<record>
+  <date>2017-04-03T11:46:10</date>
+  <millis>1491234370252</millis>
+  <sequence>14</sequence>
+  <logger>MyLog</logger>
+  <level>INFO</level>
+  <class>controller.Controller</class>
+  <method>logEvent</method>
+  <thread>15</thread>
+  <message>03/04/2017 11:46:10,user1,ourScheme,login,failure</message>
+</record>
+<record>
+  <date>2017-04-03T11:46:14</date>
+  <millis>1491234374058</millis>
+  <sequence>15</sequence>
+  <logger>MyLog</logger>
+  <level>INFO</level>
+  <class>controller.Controller</class>
+  <method>logEvent</method>
+  <thread>15</thread>
+  <message>03/04/2017 11:46:14,user1,scheme,enter,start</message>
+</record>
+<record>
+  <date>2017-04-03T11:46:28</date>
+  <millis>1491234388124</millis>
+  <sequence>16</sequence>
+  <logger>MyLog</logger>
+  <level>INFO</level>
+  <class>controller.Controller</class>
+  <method>logEvent</method>
+  <thread>15</thread>
+  <message>03/04/2017 11:46:28,user1,scheme,enter,start</message>
+</record>
+<record>
+  <date>2017-04-03T11:46:43</date>
+  <millis>1491234403163</millis>
+  <sequence>17</sequence>
+  <logger>MyLog</logger>
+  <level>INFO</level>
+  <class>controller.Controller</class>
+  <method>logEvent</method>
+  <thread>15</thread>
+  <message>03/04/2017 11:46:43,user1,scheme,enter,start</message>
+</record>
+<record>
+  <date>2017-04-03T11:46:53</date>
+  <millis>1491234413170</millis>
+  <sequence>18</sequence>
+  <logger>MyLog</logger>
+  <level>INFO</level>
+  <class>controller.Controller</class>
+  <method>logEvent</method>
+  <thread>15</thread>
+  <message>03/04/2017 11:46:53,user1,ourScheme,login,failure</message>
+</record>
+<record>
+  <date>2017-04-03T11:47:04</date>
+  <millis>1491234424664</millis>
+  <sequence>19</sequence>
+  <logger>MyLog</logger>
+  <level>INFO</level>
+  <class>controller.Controller</class>
+  <method>logEvent</method>
+  <thread>15</thread>
+  <message>03/04/2017 11:47:04,user1,scheme,enter,start</message>
+</record>
+<record>
+  <date>2017-04-03T11:47:24</date>
+  <millis>1491234444506</millis>
+  <sequence>20</sequence>
+  <logger>MyLog</logger>
+  <level>INFO</level>
+  <class>controller.Controller</class>
+  <method>logEvent</method>
+  <thread>15</thread>
+  <message>03/04/2017 11:47:24,user1,scheme,enter,start</message>
+</record>
+<record>
+  <date>2017-04-03T11:47:39</date>
+  <millis>1491234459278</millis>
+  <sequence>21</sequence>
+  <logger>MyLog</logger>
+  <level>INFO</level>
+  <class>controller.Controller</class>
+  <method>logEvent</method>
+  <thread>15</thread>
+  <message>03/04/2017 11:47:39,user1,scheme,enter,start</message>
+</record>
+<record>
+  <date>2017-04-03T11:47:48</date>
+  <millis>1491234468135</millis>
+  <sequence>22</sequence>
+  <logger>MyLog</logger>
+  <level>INFO</level>
+  <class>controller.Controller</class>
+  <method>logEvent</method>
+  <thread>15</thread>
+  <message>03/04/2017 11:47:48,user1,ourScheme,login,failure</message>
+</record>
+<record>
+  <date>2017-04-03T11:47:50</date>
+  <millis>1491234470358</millis>
+  <sequence>23</sequence>
+  <logger>MyLog</logger>
+  <level>INFO</level>
+  <class>controller.Controller</class>
+  <method>logEvent</method>
+  <thread>15</thread>
+  <message>03/04/2017 11:47:50,user1,scheme,enter,start</message>
+</record>
+<record>
+  <date>2017-04-03T11:48:01</date>
+  <millis>1491234481659</millis>
+  <sequence>24</sequence>
+  <logger>MyLog</logger>
+  <level>INFO</level>
+  <class>controller.Controller</class>
+  <method>logEvent</method>
+  <thread>15</thread>
+  <message>03/04/2017 11:48:01,user1,scheme,enter,start</message>
+</record>
+<record>
+  <date>2017-04-03T11:48:11</date>
+  <millis>1491234491205</millis>
+  <sequence>25</sequence>
+  <logger>MyLog</logger>
+  <level>INFO</level>
+  <class>controller.Controller</class>
+  <method>logEvent</method>
+  <thread>15</thread>
+  <message>03/04/2017 11:48:11,user1,scheme,enter,start</message>
+</record>
+<record>
+  <date>2017-04-03T11:48:24</date>
+  <millis>1491234504654</millis>
+  <sequence>26</sequence>
+  <logger>MyLog</logger>
+  <level>INFO</level>
+  <class>controller.Controller</class>
+  <method>logEvent</method>
+  <thread>15</thread>
+  <message>03/04/2017 11:48:24,user1,ourScheme,login,failure</message>
+</record>
+<record>
+  <date>2017-04-03T11:48:27</date>
+  <millis>1491234507844</millis>
+  <sequence>27</sequence>
+  <logger>MyLog</logger>
+  <level>INFO</level>
+  <class>controller.Controller</class>
+  <method>logEvent</method>
+  <thread>15</thread>
+  <message>03/04/2017 11:48:27,user1,scheme,enter,start</message>
+</record>
+<record>
+  <date>2017-04-03T11:48:38</date>
+  <millis>1491234518957</millis>
+  <sequence>28</sequence>
+  <logger>MyLog</logger>
+  <level>INFO</level>
+  <class>controller.Controller</class>
+  <method>logEvent</method>
+  <thread>15</thread>
+  <message>03/04/2017 11:48:38,user1,scheme,enter,start</message>
+</record>
+<record>
+  <date>2017-04-03T11:48:58</date>
+  <millis>1491234538239</millis>
+  <sequence>29</sequence>
+  <logger>MyLog</logger>
+  <level>INFO</level>
+  <class>controller.Controller</class>
+  <method>logEvent</method>
+  <thread>15</thread>
+  <message>03/04/2017 11:48:58,user1,scheme,enter,start</message>
+</record>
+<record>
+  <date>2017-04-03T11:49:07</date>
+  <millis>1491234547871</millis>
+  <sequence>30</sequence>
+  <logger>MyLog</logger>
+  <level>INFO</level>
+  <class>controller.Controller</class>
+  <method>logEvent</method>
+  <thread>15</thread>
+  <message>03/04/2017 11:49:07,user1,ourScheme,login,failure</message>
+</record>
+</log>

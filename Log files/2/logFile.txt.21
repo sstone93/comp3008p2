@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2017-04-03T11:57:22</date>
+  <millis>1491235042301</millis>
+  <sequence>21</sequence>
+  <logger>MyLog</logger>
+  <level>INFO</level>
+  <class>controller.Controller</class>
+  <method>logEvent</method>
+  <thread>15</thread>
+  <message>03/04/2017 11:57:22,user2,scheme,enter,start</message>
+</record>
+<record>
+  <date>2017-04-03T11:58:03</date>
+  <millis>1491235083738</millis>
+  <sequence>22</sequence>
+  <logger>MyLog</logger>
+  <level>INFO</level>
+  <class>controller.Controller</class>
+  <method>logEvent</method>
+  <thread>15</thread>
+  <message>03/04/2017 11:58:03,user2,scheme,enter,start</message>
+</record>
+<record>
+  <date>2017-04-03T11:58:25</date>
+  <millis>1491235105398</millis>
+  <sequence>23</sequence>
+  <logger>MyLog</logger>
+  <level>INFO</level>
+  <class>controller.Controller</class>
+  <method>logEvent</method>
+  <thread>15</thread>
+  <message>03/04/2017 11:58:25,user2,scheme,enter,start</message>
+</record>
+<record>
+  <date>2017-04-03T11:58:37</date>
+  <millis>1491235117068</millis>
+  <sequence>24</sequence>
+  <logger>MyLog</logger>
+  <level>INFO</level>
+  <class>controller.Controller</class>
+  <method>logEvent</method>
+  <thread>15</thread>
+  <message>03/04/2017 11:58:37,user2,ourScheme,login,failure</message>
+</record>
+<record>
+  <date>2017-04-03T11:58:39</date>
+  <millis>1491235119176</millis>
+  <sequence>25</sequence>
+  <logger>MyLog</logger>
+  <level>INFO</level>
+  <class>controller.Controller</class>
+  <method>logEvent</method>
+  <thread>15</thread>
+  <message>03/04/2017 11:58:39,user2,scheme,enter,start</message>
+</record>
+<record>
+  <date>2017-04-03T11:58:48</date>
+  <millis>1491235128379</millis>
+  <sequence>26</sequence>
+  <logger>MyLog</logger>
+  <level>INFO</level>
+  <class>controller.Controller</class>
+  <method>logEvent</method>
+  <thread>15</thread>
+  <message>03/04/2017 11:58:48,user2,ourScheme,login,success</message>
+</record>
+</log>

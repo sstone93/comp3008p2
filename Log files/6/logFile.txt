@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2017-04-03T12:35:37</date>
+  <millis>1491237337910</millis>
+  <sequence>0</sequence>
+  <logger>MyLog</logger>
+  <level>INFO</level>
+  <class>controller.Controller</class>
+  <method>logEvent</method>
+  <thread>15</thread>
+  <message>03/04/2017 12:35:37,user6,scheme,enter,start</message>
+</record>
+<record>
+  <date>2017-04-03T12:36:16</date>
+  <millis>1491237376182</millis>
+  <sequence>1</sequence>
+  <logger>MyLog</logger>
+  <level>INFO</level>
+  <class>controller.Controller</class>
+  <method>logEvent</method>
+  <thread>15</thread>
+  <message>03/04/2017 12:36:16,user6,scheme,enter,start</message>
+</record>
+<record>
+  <date>2017-04-03T12:37:04</date>
+  <millis>1491237424948</millis>
+  <sequence>2</sequence>
+  <logger>MyLog</logger>
+  <level>INFO</level>
+  <class>controller.Controller</class>
+  <method>logEvent</method>
+  <thread>15</thread>
+  <message>03/04/2017 12:37:04,user6,scheme,enter,start</message>
+</record>

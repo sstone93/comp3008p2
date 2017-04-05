@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2017-04-05T10:27:07</date>
+  <millis>1491402427069</millis>
+  <sequence>12</sequence>
+  <logger>MyLog</logger>
+  <level>INFO</level>
+  <class>controller.Controller</class>
+  <method>logEvent</method>
+  <thread>15</thread>
+  <message>05/04/2017 10:27:07,user19,scheme,enter,start</message>
+</record>
+<record>
+  <date>2017-04-05T10:27:40</date>
+  <millis>1491402460784</millis>
+  <sequence>13</sequence>
+  <logger>MyLog</logger>
+  <level>INFO</level>
+  <class>controller.Controller</class>
+  <method>logEvent</method>
+  <thread>15</thread>
+  <message>05/04/2017 10:27:40,user19,scheme,enter,start</message>
+</record>
+<record>
+  <date>2017-04-05T10:27:59</date>
+  <millis>1491402479789</millis>
+  <sequence>14</sequence>
+  <logger>MyLog</logger>
+  <level>INFO</level>
+  <class>controller.Controller</class>
+  <method>logEvent</method>
+  <thread>15</thread>
+  <message>05/04/2017 10:27:59,user19,ourScheme,login,success</message>
+</record>
+<record>
+  <date>2017-04-05T10:28:07</date>
+  <millis>1491402487331</millis>
+  <sequence>15</sequence>
+  <logger>MyLog</logger>
+  <level>INFO</level>
+  <class>controller.Controller</class>
+  <method>logEvent</method>
+  <thread>15</thread>
+  <message>05/04/2017 10:28:07,user19,scheme,enter,start</message>
+</record>
+<record>
+  <date>2017-04-05T10:28:26</date>
+  <millis>1491402506927</millis>
+  <sequence>16</sequence>
+  <logger>MyLog</logger>
+  <level>INFO</level>
+  <class>controller.Controller</class>
+  <method>logEvent</method>
+  <thread>15</thread>
+  <message>05/04/2017 10:28:26,user19,scheme,enter,start</message>
+</record>

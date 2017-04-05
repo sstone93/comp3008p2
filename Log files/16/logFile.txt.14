@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2017-04-03T20:18:31</date>
+  <millis>1491265111328</millis>
+  <sequence>14</sequence>
+  <logger>MyLog</logger>
+  <level>INFO</level>
+  <class>controller.Controller</class>
+  <method>logEvent</method>
+  <thread>15</thread>
+  <message>03/04/2017 20:18:31,user17,ourScheme,login,success</message>
+</record>
+<record>
+  <date>2017-04-03T20:18:34</date>
+  <millis>1491265114717</millis>
+  <sequence>15</sequence>
+  <logger>MyLog</logger>
+  <level>INFO</level>
+  <class>controller.Controller</class>
+  <method>logEvent</method>
+  <thread>15</thread>
+  <message>03/04/2017 20:18:34,user17,scheme,enter,start</message>
+</record>
+<record>
+  <date>2017-04-03T20:18:47</date>
+  <millis>1491265127142</millis>
+  <sequence>16</sequence>
+  <logger>MyLog</logger>
+  <level>INFO</level>
+  <class>controller.Controller</class>
+  <method>logEvent</method>
+  <thread>15</thread>
+  <message>03/04/2017 20:18:47,user17,ourScheme,login,success</message>
+</record>
+<record>
+  <date>2017-04-03T20:18:50</date>
+  <millis>1491265130187</millis>
+  <sequence>17</sequence>
+  <logger>MyLog</logger>
+  <level>INFO</level>
+  <class>controller.Controller</class>
+  <method>logEvent</method>
+  <thread>15</thread>
+  <message>03/04/2017 20:18:50,user17,scheme,enter,start</message>
+</record>
+<record>
+  <date>2017-04-03T20:19:01</date>
+  <millis>1491265141672</millis>
+  <sequence>18</sequence>
+  <logger>MyLog</logger>
+  <level>INFO</level>
+  <class>controller.Controller</class>
+  <method>logEvent</method>
+  <thread>15</thread>
+  <message>03/04/2017 20:19:01,user17,ourScheme,login,success</message>
+</record>
+<record>
+  <date>2017-04-03T20:19:05</date>
+  <millis>1491265145609</millis>
+  <sequence>19</sequence>
+  <logger>MyLog</logger>
+  <level>INFO</level>
+  <class>controller.Controller</class>
+  <method>logEvent</method>
+  <thread>15</thread>
+  <message>03/04/2017 20:19:05,user17,scheme,enter,start</message>
+</record>
+<record>
+  <date>2017-04-03T20:19:17</date>
+  <millis>1491265157950</millis>
+  <sequence>20</sequence>
+  <logger>MyLog</logger>
+  <level>INFO</level>
+  <class>controller.Controller</class>
+  <method>logEvent</method>
+  <thread>15</thread>
+  <message>03/04/2017 20:19:17,user17,ourScheme,login,success</message>
+</record>
+</log>
