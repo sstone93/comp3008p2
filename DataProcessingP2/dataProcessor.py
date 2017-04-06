@@ -139,11 +139,11 @@ def main():
     
     writeLoginsToCSV(loginData)
     
-    '''loginData = readLoginsCSV()
+    loginData = readLoginsCSV()
     
     dataByUser = organizeByUser(loginData)
     
-    writeUserDataToCSV(dataByUser)'''
+    writeUserDataToCSV(dataByUser)
     
 if __name__ == "__main__":
     main()
