@@ -33,7 +33,7 @@ Files:
 bin {folder) - This folder contains the compiled .class files
 src (folder) - This folder contains the source code for our application
     Controller (folder)
-        Controller.java - this file contains the controller class
+        Controller.java - this file contains the controller class. This is where the main function to execute the program is located.
     model (folder)
         MainModel.java - contains the class that represents the testing system model
         Password.java - contains the class that represents the password scheme we created
