@@ -20,10 +20,6 @@ import java.io.Writer;
 import java.io.FileWriter;
 import java.util.Set; 
 
-/*
- * This class will control the interaction between the password model and the view
- * It has functions to update the password state as the user progresses
- */
 public class Controller {
 	
 	private View view;
@@ -71,14 +67,11 @@ public class Controller {
 		
 	}
 	
-	// Creates a random 
 	public Set<TYPE> createRandomOrder() {
 		 Set<TYPE> keys = mainModel.getAssignedPasswords().keySet();
 		 return keys;
 	}
 	
-	// Function that handles when the user presses "submit"
-	// Changes the state and status depending on the interaction the user had
 	public void handleSubmit(){
 		Password assignedPassword = getPasswordBasedOnType();
 		boolean success = assignedPassword.equals(enteredPassword);
@@ -128,6 +121,8 @@ public class Controller {
  				}
  			}
 		}
+		// TODO: change the state based off of success
+		System.out.println("NEXT:::??? "+ mainModel.getCanMoveOn());
 		
 		mainModel.changePasswordState(PW_STATE.LANDSCAPE);
 		enteredPassword = new Password();
@@ -177,8 +172,6 @@ public class Controller {
 		mainModel.resetAttempts();
 	}
 	
-	// Handles when a user enters the text password
-	// This updates the text for the entered password
 	public void handleTextEnter(String textpw){
 		if (textpw.length() == 6){
 			enteredPassword.setRandomWord(textpw);
@@ -262,7 +255,6 @@ public class Controller {
 	    }  
 	}
 	
-	// Allows the view to access the mainModel class
 	public MainModel getMainModel() {
 		return mainModel;
 	}
@@ -289,7 +281,6 @@ public class Controller {
             return randWord;
 	}
 	
-	// Grabs the user id from a text file and updates it
 	public String getFileUserID() {
         Scanner x;
         int userNum;
@@ -319,7 +310,6 @@ public class Controller {
         return userID;
 	}
 	
-	// gets three unique numbers between 1 and 16
 	public static ArrayList<String> getThreeNumbers(String letter) {
 		int count  = 0;
 		int image1 = 0;
@@ -358,8 +348,6 @@ public class Controller {
 		return false;
 	}
 	
-	// helper functions, gets random number
-	// input: min value, max value
 	public static int getRandomNumber(int min, int max) {
 		int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
 		return randomNum;
