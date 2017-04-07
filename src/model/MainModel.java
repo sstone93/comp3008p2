@@ -3,11 +3,16 @@ package model;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+
+/*
+ * This class will be a representation of our password scheme.
+ * it will have fields for each part of the password and an equality method
+ */
 public class MainModel {
 	public enum MODE {TRAINING, TESTING, PASSWORD_ENTERED, FINISHED };
-	public enum LOGIN_STATUS { SUCCESS, FAILURE};
+	public enum LOGIN_STATUS { SUCCESS, FAILURE}; // do the passwords match or not?
 	public enum TYPE { BANK, FACEBOOK, SCHOOL};
-	public enum PW_STATE { LANDSCAPE, WORDS, EMOJI };
+	public enum PW_STATE { LANDSCAPE, WORDS, EMOJI }; // indicates which part of the password user is entering
 	private HashMap<TYPE, Password> assignedPasswords = new HashMap<TYPE, Password>(3);
 	private TYPE currentType;
 	private MODE currentMode;
@@ -20,16 +25,18 @@ public class MainModel {
 	private boolean canMoveOn;
 	
 	public MainModel() {
-		currentType = TYPE.FACEBOOK;
-		currentMode = MODE.TRAINING;
-		currentStatus = LOGIN_STATUS.FAILURE;
-		currentPwState = PW_STATE.LANDSCAPE;
-		attempts = 0;
-		landscapeEntered = 0;
-		emojiEntered = 0;
-		userID = "";
-		canMoveOn = false;
+		currentType = TYPE.FACEBOOK; // the site user is entering the password for currently
+		currentMode = MODE.TRAINING; 
+		currentStatus = LOGIN_STATUS.FAILURE; 
+		currentPwState = PW_STATE.LANDSCAPE; 
+		attempts = 0; // number of attempts to enter a password during testing
+		landscapeEntered = 0; // count for the number of landscape images clicked
+		emojiEntered = 0; // count for the number of emojis clicked
+		userID = ""; // user id of the user, used for logging
+		canMoveOn = false; // can the user move to the next state?
 	}
+	
+	// BELOW: getter/setters
 	
 	public HashMap<TYPE, Password> getAssignedPasswords() {
 		return assignedPasswords;
