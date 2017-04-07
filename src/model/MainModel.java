@@ -3,10 +3,8 @@ package model;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-
 /*
- * This class will be a representation of our password scheme.
- * it will have fields for each part of the password and an equality method
+ * This class is used to model the whole state of the system
  */
 public class MainModel {
 	public enum MODE {TRAINING, TESTING, PASSWORD_ENTERED, FINISHED };
