@@ -44,6 +44,8 @@ public class Password {
 		return true ;
 	}
 	
+	// below: getter/setters
+	
 	public String getRandomWord() {
 		return randomWord;
 	}
@@ -77,4 +79,3 @@ public class Password {
 	}
 		
 }
-
