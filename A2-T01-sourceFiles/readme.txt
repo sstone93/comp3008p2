@@ -34,7 +34,7 @@ Purpose: The eclipse project files and source code for our password scheme and t
 If the jar contained in this file is run, log files will be created in this folder.
 Files:
 bin {folder) - This folder contains the compiled .class files
-PasswordTestingApp - a runnable jar file of our application used for participant testing.
+PasswordTestingApp.jar - a runnable jar file of our application used for participant testing.
 src (folder) - This folder contains the source code for our application
     Controller (folder)
         Controller.java - this file contains the controller class. This is where the main function to execute the program is located.
