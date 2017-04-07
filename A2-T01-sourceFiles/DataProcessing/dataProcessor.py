@@ -1,6 +1,14 @@
 import csv
 from datetime import datetime
 
+'''
+dataProcessor.py
+Run from the command line with no arguments
+This processes the log data for the three provided schemes
+into a single csv file with one line per user.
+'''
+
+#Function to import the original csv files
 def readRawDataCSV():
     data = []
     try:
@@ -31,6 +39,7 @@ def readRawDataCSV():
         return
     return data
     
+#Writes the intermediate file that contains one line per login
 def writeLoginsToCSV(data):
     with open("logins.csv", "wb") as csvfile:
         fieldnames = ["user", "site", "scheme", "event", "timeDelta"]
@@ -40,6 +49,7 @@ def writeLoginsToCSV(data):
         for row in data:
             writer.writerow(row)
             
+#reads the intermediate file
 def readLoginsCSV():
     data = []
     try:
@@ -52,6 +62,7 @@ def readLoginsCSV():
         return
     return data
     
+#Writes the final data to the csv file
 def writeUserDataToCSV(data):
     with open("userData.csv", "wb") as csvfile:
         fieldnames = ["user", "scheme", "totalLogins", "successes", "failures", "meanSucTime", "meanFailTime"]
@@ -61,26 +72,22 @@ def writeUserDataToCSV(data):
         for row in data:
             writer.writerow(row)
     
+#Function to identify login attempts in the original data
 def findLogins(rawData):
     startEvents = {}
     data = []
     
-    starts = 0
-    logins = 0
-    falseLogins = 0
-    
     for row in rawData:
         if row["mode"] == "enter" and row["event"] == "start":
             startEvents[row['user']] = row
-            starts = starts + 1
             
         if row["mode" ] == "login":
             if not row['user'] in startEvents.keys():
-                falseLogins = falseLogins + 1
+                #login events are not content if a 
+                #corresponding start event was not found
                 continue
                 
             startEvent = startEvents[row['user']]
-            
             
             startTime = datetime.strptime(startEvent["time"],"%Y-%m-%d %H:%M:%S")
             endTime = datetime.strptime(row["time"],"%Y-%m-%d %H:%M:%S")
@@ -90,16 +97,15 @@ def findLogins(rawData):
             
             data.append(logEntry)
             
-            logins = logins + 1
             del startEvents[row['user']]
             
-    print "Starts %d" %starts
-    print "Complete logins %d" %logins
-    print "Logins without a start %d" %falseLogins
     return data
     
+#Takes the intermediate data and organizes it into a single entry per user
 def organizeByUser(loginsData):
     usersDict = {}
+    
+    #a dictionary with users as keys and lists of login events as values is created
     for row in loginsData:
         if row['user'] in usersDict.keys():
             usersDict[row['user']].append(row)
@@ -137,7 +143,8 @@ def organizeByUser(loginsData):
         
     return data
     
-            
+#the main function that is executed when the script is run
+#calls the other functions in the required order
 def main():
     rawData = readRawDataCSV()
     

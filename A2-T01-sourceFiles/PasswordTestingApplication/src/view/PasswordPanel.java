@@ -17,6 +17,11 @@ import javax.swing.event.DocumentListener;
 import controller.Controller;
 import model.*;
 
+/*
+This file contains the passwordPanel view component
+This is the class that provide most of the visual 
+display for our password scheme
+*/
 @SuppressWarnings("serial")
 public class PasswordPanel extends javax.swing.JPanel {
 	
@@ -30,11 +35,14 @@ public class PasswordPanel extends javax.swing.JPanel {
 	private Controller controller;
 	private JLabel clicksLabel;
 	
+    /*
+    The constructor that initializes all of the components
+    */
 	public PasswordPanel(Controller c){
 		controller = c;
 		
 		setBounds(5, 100, 985, 365);
-		setBorder(new LineBorder(Color.GRAY));//TODO:remove this later
+		setBorder(new LineBorder(Color.GRAY));
 		setLayout(null);
 		
 		JLabel label = new JLabel("Enter text");
@@ -46,17 +54,7 @@ public class PasswordPanel extends javax.swing.JPanel {
 		entryTextField = new JPasswordField("");
 		entryTextField.setBounds(400, 150, 180, 30);
 		entryTextField.setFont(entryTextField.getFont().deriveFont(24.0f));
-		/*entryTextField.addFocusListener(new FocusListener(){
-			public void focusLost(FocusEvent e){
-				String t = new String(entryTextField.getPassword());
-				controller.handleTextEnter(t);
-				// TODO: log end time in controller
-			}
-			public void focusGained(FocusEvent e){
-				//do nothing, we don't care about this.
-				// TODO: log start time in controller
-			}
-		});*/
+        //a listener is added to the text field to detect the text change event
 		entryTextField.getDocument().addDocumentListener(new DocumentListener(){
 			public void changedUpdate(DocumentEvent e){
 				callController();
@@ -90,6 +88,7 @@ public class PasswordPanel extends javax.swing.JPanel {
 		int xStart = 15;
 		int yStart = 10;
 		
+        //The image component of the password is displayed using a grid of buttons
 		imageButtons = new JButton[16];
 		
 		for (int i = 0; i < 16; i++){
@@ -118,6 +117,7 @@ public class PasswordPanel extends javax.swing.JPanel {
 		xStart = 670;
 		emojiButtons = new JButton[16];
 		
+        //The emoji component of the password is displayed using a grid of buttons
 		for (int i = 0; i < 16; i++){
 			
 			try{
@@ -177,10 +177,14 @@ public class PasswordPanel extends javax.swing.JPanel {
 		add(clicksLabel);
 	}
 	
+    /*
+    Updates the panel based on the state of the model
+    */
 	public void update(){
 		MainModel model = controller.getMainModel();
 		
 		if (model.getCurrentMode() == MainModel.MODE.TRAINING){
+            //The user can choose to have the password displayed while they are training
 			if(showCheckBox.isSelected()){
 				Password password = model.getAssignedPasswords().get(model.getCurrentType());
 				displayTextField.setText(password.getRandomWord());
@@ -204,6 +208,7 @@ public class PasswordPanel extends javax.swing.JPanel {
 				}
 			}
 			else{
+                //ensuring that the password is never shown in testing mode
 				displayTextField.setText("");
 				displayTextField.setVisible(false);
 				for(int i = 0; i < 16; i++){
@@ -232,7 +237,6 @@ public class PasswordPanel extends javax.swing.JPanel {
 			nextButton.setVisible(false);
 			showCheckBox.setVisible(false);
 		}
-		//TODO:Add dialogs when in other modes
 		
 		//Only the area the user is currently entering should be visible
 		if(model.getPasswordState() == MainModel.PW_STATE.LANDSCAPE){
