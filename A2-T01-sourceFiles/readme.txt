@@ -53,4 +53,9 @@ src (folder) - This folder contains the source code for our application
 Folder: RFiles
 Purpose: The R files for running analysis on the data
 Files:
-....
+a2_Part1_Q3.R - this script performs the statistical analysis required for Part 1 Question 3.
+	It performs statisical analysis on userData.csv located in ~A2-T01-sourceFiles/DataProcessing
+a2_Part2_Q6_Part1.R - this script performs the statistical analysis for comparing the results of our password scheme with Text28
+	It performs statisical analysis on userData.csv located in ~A2-T01-sourceFiles/DataProcessing2
+a2_Part2_Q6_Part2.R - this script performs the statistical analysis for our LimeSurvey results
+	It performs statisical analysis on userData.csv located in ~A2-T01-sourceFiles/DataProcessing2
